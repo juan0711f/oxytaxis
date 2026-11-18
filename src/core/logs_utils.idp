@@ -1,0 +1,306 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Utilidades para escribir logs y resumen
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Escribe texto en archivo. Si title=true lo escribe como un titulo.
+*/
+func real writeText(string filename, string text, bool title){
+    ofstream f(filename, append);
+    if(title)
+        f << "\n ========= " << text << " ========= \n";
+    else
+        f << text;
+    return 0.;
+};
+
+/*
+    Escribe los controles temporales en archivo.
+*/
+func real printControls(real[int] C0, real[int] S0, string filename, real timeStep, int size){
+    ofstream f(filename, append);
+    f.precision(12);
+    f << "\n ========= CONTROLES ========= \n";
+    for(int n = 0 ; n <= size; n++){
+        f << "C["<<n<<"]="<<C0[n]<<";S["<<n<<"] = "<<S0[n]<<";\n";
+    }
+    return 0.;
+};
+
+/*
+    Escribe el resumen de ejecucion antes de iniciar el algoritmo.
+*/
+func real writeRunSummary(){
+    string dateTime = getDateTime();
+    ofstream f(summaryFile);
+    f.precision(12);
+    f << "============================================================\n";
+    f << " Resumen de ejecucion\n";
+    f << "============================================================\n";
+    f << " Simulacion : " << fileName << "\n";
+    f << " Modo       : " << runModeLabel << "\n";
+    f << " Comando    : " << (executionCommand == "" ? "(no disponible)" : executionCommand) << "\n";
+    f << " Fecha/Hora : " << dateTime << "\n";
+    f << " Comentario : " << (commentText == "" ? "(sin comentario)" : commentText) << "\n";
+    f << "------------------------------------------------------------\n";
+    f << " Rutas\n";
+    f << "   - Base       : " << folder << "\n";
+    f << "   - Ejecucion  : " << runFolder << "\n";
+    f << "   - Imagenes   : " << imagesFolder << "\n";
+    f << "   - Soluciones : " << solutionsFolder << "\n";
+    f << "   - Malla      : " << meshPath << "\n";
+    f << "------------------------------------------------------------\n";
+    if(showU || showSigma){
+        f << " Visualizacion\n";
+        if(showU) f << "   - mostrarU: activo\n";
+        if(showSigma) f << "   - mostrarSigma: activo\n";
+        f << "------------------------------------------------------------\n";
+    }
+    f << " Discretizacion\n";
+    f << "   - nIter: " << nIter << "\n";
+    f << "   - dt: " << dt << "\n";
+    f << "   - T: " << T << "\n";
+    if(!onlyGrowth) f << "   - maxControlIter: " << maxControlIterations << "\n";
+    f << "------------------------------------------------------------\n";
+    f << " Parametros del modelo\n";
+    f << "   - Du: " << Du << ", alpha: " << alpha << ", beta: " << beta << ", xhi: " << xhi << ", psi: " << psi << "\n";
+    f << "   - DSigma: " << DSigma << ", Aox: " << Aox << ", kox: " << kox << ", Per: " << Per << ", Sv: " << Sv << ", Sc: " << Sc << "\n";
+    f << "   - pmax: " << pmax << ", b: " << b << ", CT: " << CT << ", cmax: " << controlCMax << "\n";
+    if(onlyGrowth){
+        f << " Controles\n";
+        f << "   - C=0 y S=0 en todos los pasos temporales\n";
+    }
+    f << " Pesos funcional\n";
+    f << "   - k1: " << k1 << ", k2: " << k2 << ", k3: " << k3 << ", k4: " << k4 << "\n";
+    f << "   - l1: " << l1 << ", l2: " << l2 << "\n";
+    if(!onlyGrowth){
+        f << " Optimizador\n";
+        f << "   - alpha0Adam: " << alpha0Adam << ", beta1Adam: " << beta1Adam << ", beta2Adam: " << beta2Adam << ", epsilonAdam: " << epsilonAdam << "\n";
+    }
+    f << "------------------------------------------------------------\n";
+    f << " Cambios CLI\n";
+    if(changesInfo == "") f << "   - (sin cambios)\n"; else f << changesInfo;
+    f << " Cambios de parametros\n";
+    if(paramsChangesInfo == "") f << "   - (sin cambios)\n"; else f << paramsChangesInfo;
+    f << "============================================================\n\n";
+    return 0.;
+}
+
+/*
+    Agrega al resumen la salida de un comando del sistema.
+*/
+func real appendCommandOutputToSummary(string title, string command){
+    string tempFile = runFolder + ".tmp_cmdout.txt";
+    system(command + " > " + tempFile + " 2>&1");
+
+    ofstream f(summaryFile, append);
+    ifstream commandOutput(tempFile);
+    string line = "";
+    int lineCount = 0;
+
+    f << "   - " << title << ":\n";
+    while(commandOutput.good())
+    {
+        getline(commandOutput, line);
+        if(line != "" && line.find("Operation not permitted") == -1)
+        {
+            f << "       " << line << "\n";
+            lineCount += 1;
+        }
+    }
+    if(lineCount == 0) f << "       (no disponible)\n";
+
+    system("rm -f " + tempFile);
+    return 0.;
+}
+
+/*
+    Agrega el encabezado de informacion del equipo al resumen del control optimo.
+*/
+func real appendComputerInfoToSummary(){
+    ofstream f(summaryFile, append);
+    f << " Informacion del equipo\n";
+    f << "   - Nota: algunos campos pueden aparecer como no disponibles segun el sistema operativo.\n";
+    return 0.;
+}
+
+/*
+    Agrega los detalles del equipo al resumen del control optimo.
+*/
+func real appendComputerInfoDetailsToSummary(){
+    string osCommand = "if command -v sw_vers >/dev/null 2>&1; then ";
+    osCommand = osCommand + "echo $(sw_vers -productName) $(sw_vers -productVersion); ";
+    osCommand = osCommand + "elif [ -r /etc/os-release ]; then . /etc/os-release; ";
+    osCommand = osCommand + "echo $PRETTY_NAME; else uname -srm; fi";
+
+    string hardwareCommand = "if command -v system_profiler >/dev/null 2>&1; then ";
+    hardwareCommand = hardwareCommand + "system_profiler SPHardwareDataType 2>/dev/null ";
+    hardwareCommand = hardwareCommand + "| grep -E \"Model Name|Model Identifier|Chip|Memory\"; ";
+    hardwareCommand = hardwareCommand + "elif command -v hostnamectl >/dev/null 2>&1; then ";
+    hardwareCommand = hardwareCommand + "hostnamectl | grep -E \"Hardware|Architecture|Kernel\"; ";
+    hardwareCommand = hardwareCommand + "else uname -m; fi";
+
+    string processorCommand = "if command -v system_profiler >/dev/null 2>&1; then ";
+    processorCommand = processorCommand + "system_profiler SPHardwareDataType 2>/dev/null ";
+    processorCommand = processorCommand + "| grep -E \"Chip|Processor Name|Total Number of Cores\"; ";
+    processorCommand = processorCommand + "elif command -v lscpu >/dev/null 2>&1; then ";
+    processorCommand = processorCommand + "lscpu | grep -E \"Model name|Architecture|CPU|Core|Thread\"; ";
+    processorCommand = processorCommand + "elif [ -r /proc/cpuinfo ]; then ";
+    processorCommand = processorCommand + "grep -m 1 \"model name\" /proc/cpuinfo; else uname -m; fi";
+
+    string memoryCommand = "if command -v system_profiler >/dev/null 2>&1; then ";
+    memoryCommand = memoryCommand + "system_profiler SPHardwareDataType 2>/dev/null | grep -E \"Memory\"; ";
+    memoryCommand = memoryCommand + "elif command -v free >/dev/null 2>&1; then free -h | grep -E \"Mem|Memoria\"; ";
+    memoryCommand = memoryCommand + "elif [ -r /proc/meminfo ]; then grep -m 1 \"MemTotal\" /proc/meminfo; ";
+    memoryCommand = memoryCommand + "else echo no disponible; fi";
+
+    string gpuCommand = "if command -v system_profiler >/dev/null 2>&1; then ";
+    gpuCommand = gpuCommand + "system_profiler SPDisplaysDataType 2>/dev/null ";
+    gpuCommand = gpuCommand + "| grep -E \"Chipset Model|VRAM|Metal\"; ";
+    gpuCommand = gpuCommand + "elif command -v lspci >/dev/null 2>&1; then ";
+    gpuCommand = gpuCommand + "lspci | grep -Ei \"vga|3d|display\"; else echo no disponible; fi";
+
+    appendCommandOutputToSummary("Sistema operativo", osCommand);
+    appendCommandOutputToSummary("Hardware", hardwareCommand);
+    appendCommandOutputToSummary("Procesador", processorCommand);
+    appendCommandOutputToSummary("Memoria RAM", memoryCommand);
+    appendCommandOutputToSummary("GPU", gpuCommand);
+
+    return 0.;
+}
+
+/*
+    Escribe al final del resumen la informacion completa de la mejor iteracion, es decir,
+    la que alcanzo el funcional minimo. Los controles y los estados reportados son los
+    asociados a ese minimo, no los de la ultima iteracion ejecutada.
+*/
+func real writeOptimalControlFinalSummary(int lastIteration, string stopReason, int equalFunctionalStreak, real elapsedSeconds, real lastJ1, real lastJ2, real lastJ3, real lastJ4, real lastJ5, real lastJ6, real lastJ, real[int] &lastC, real[int] &lastS){
+    // Se abre el resumen en modo append para conservar todo lo escrito al inicio y durante las iteraciones.
+    ofstream f(summaryFile, append);
+
+    // Se usa precision alta para no perder informacion numerica en funcionales, controles e integrales.
+    f.precision(12);
+
+    // Encabezado del bloque final del problema de control optimo.
+    f << "\n============================================================\n";
+    f << " Resumen final de control optimo\n";
+    f << "============================================================\n";
+
+    // Informacion basica de la iteracion que alcanzo el funcional minimo.
+    f << " Iteracion del funcional minimo\n";
+    if(lastIteration >= 0)
+        f << "   - Iteracion: " << lastIteration << "\n";
+    else
+        f << "   - Iteracion: (no se ejecutaron iteraciones)\n";
+
+    // Se escribe la razon por la que termino el algoritmo.
+    f << "   - Criterio de parada: " << stopReason << "\n";
+
+    // Se guarda cuantos funcionales consecutivos quedaron iguales al terminar.
+    f << "   - Funcionales consecutivos iguales: " << equalFunctionalStreak << "\n";
+    f << "------------------------------------------------------------\n";
+
+    // Si no se ejecuto ninguna iteracion, no existen controles/estados optimos para reportar.
+    if(lastIteration >= 0)
+    {
+        // Controles asociados al funcional minimo.
+        f << " Controles optimos\n";
+        for(int m = 0; m <= nIter; m++)
+        {
+            f << "   - C[" << m << "]=" << lastC[m] << "; S[" << m << "]=" << lastS[m] << "\n";
+        }
+        f << "------------------------------------------------------------\n";
+
+        // Estados obtenidos al resolver la ecuacion directa con los controles optimos.
+        f << " Estados optimos\n";
+        for(int m = 0; m <= nIter; m++)
+        {
+            // Se cargan los estados del paso temporal m para poder integrar y consultar maximos/minimos.
+            u = uVec[m];
+            s = sVec[m];
+
+            // Se calculan indicadores espaciales de u y sigma.
+            real maxu = u[].max;
+            real minu = u[].min;
+            real maxs = s[].max;
+            real mins = s[].min;
+            real tumorVolume = int2d(Th)(u);
+            real spatialU2Integral = int2d(Th)(square(u));
+            real spatialSigmaQIntegral = int2d(Th)(square(s - sigmaQ));
+
+            // Se escribe una linea por paso temporal para facilitar lectura y postprocesamiento.
+            f << "   - Iteracion: " << m << ", t=" << m*dt;
+            f << ": Volumen=" << tumorVolume;
+            f << ", Min u=" << minu << ", Max u=" << maxu;
+            f << ", Min sigma=" << mins << ", Max sigma=" << maxs;
+            f << ", Integral u^2=" << spatialU2Integral;
+            f << ", Integral (sigma-sigmaQ)^2=" << spatialSigmaQIntegral << "\n";
+        }
+        f << "------------------------------------------------------------\n";
+
+        // Terminos del funcional calculados con los controles optimos.
+        f << " Funcional de costo\n";
+        f << "   - J1: " << lastJ1 << "\n";
+        f << "   - J2: " << lastJ2 << "\n";
+        f << "   - J3: " << lastJ3 << "\n";
+        f << "   - J4: " << lastJ4 << "\n";
+        f << "   - J5: " << lastJ5 << "\n";
+        f << "   - J6: " << lastJ6 << "\n";
+        f << "   - J total: " << lastJ << "\n";
+        f << "------------------------------------------------------------\n";
+
+        // Datos utiles para reproducibilidad y comparacion de ejecuciones.
+        f << " Datos adicionales\n";
+        f << "   - Integral temporal de C: " << integralTrapzC(lastC, dt, nIter) << "\n";
+        f << "   - Residuo proyectado (KKT): " << bestKktResidual << " (C: " << bestKktResidualC << ", S: " << bestKktResidualS << ", mu: " << bestKktMu << ")\n";
+        f << "   - Tiempo de ejecucion total (s): " << elapsedSeconds << "\n";
+        f << "   - Fecha/Hora final: " << getDateTime() << "\n";
+        f << "------------------------------------------------------------\n";
+    }
+
+    return 0.;
+}
+
+/*
+    Prepara carpetas. Solo pregunta por borrado si ya existe una carpeta con el
+    mismo numero de simulacion y el mismo modo. Si no se borra, se cancela la ejecución.
+*/
+func real configureFolders(){
+    folder = "results/"+fileName+"/";
+    runFolderName = onlyGrowth ? "soloCrecimiento" : "optimalControl";
+    runModeLabel = onlyGrowth ? "solo crecimiento" : "control optimo";
+    runFolder = folder+runFolderName+"/";
+    imagesFolder = runFolder+"images/";
+    solutionsFolder = runFolder+"solutions/";
+    summaryFile = onlyGrowth ? folder+"info_soloCrecimiento.txt" : folder+"info_controlOptimo.txt";
+    dataFile = onlyGrowth ? runFolder+"data.txt" : "";
+
+    system("mkdir -p " + folder);
+
+    int folderExists = system("test -d " + runFolder);
+    if(folderExists == 0)
+    {
+        cout << "Ya existe la carpeta '" << runFolder << "'. Se eliminara. Confirmar? (s/n): ";
+        string deleteConfirmation;
+        cin >> deleteConfirmation;
+        bool removeFolder = (deleteConfirmation == "s" || deleteConfirmation == "S" || deleteConfirmation == "y" || deleteConfirmation == "Y");
+
+        if(removeFolder)
+        {
+            system("rm -rf " + runFolder);
+            system("rm -f " + summaryFile);
+            cout << "Eliminacion confirmada. Se eliminaron los archivos en " << runFolder << endl;
+        }
+        else
+        {
+            cout << "Eliminacion cancelada. Se cancela la ejecucion para no mezclar resultados." << endl;
+            exit(0);
+        }
+    }
+
+    system("mkdir -p " + runFolder);
+    system("mkdir -p " + imagesFolder);
+    system("mkdir -p " + solutionsFolder);
+    writeRunSummary();
+    return 0.;
+}

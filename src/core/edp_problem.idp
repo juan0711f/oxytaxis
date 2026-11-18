@@ -1,0 +1,13 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Definicion de los problemas de estados
+////////////////////////////////////////////////////////////////////////////////////
+
+problem tumorDensity(u,ub)=
+    int2d(Th)(Du*(dx(u)*dx(ub)+dy(u)*dy(ub)) - xhi*(u*dx(s0)*dx(ub)+u*dy(s0)*dy(ub)) + psi*controlC*u*s0*ub)
+    +int2d(Th)(u*ub/dt - rho(s0)*u*(alpha-u0)*ub)
+    -int2d(Th)(u0*ub/dt);
+
+problem nutrients(s,sb)=
+    int2d(Th)(DSigma*(dx(s)*dx(sb)+dy(s)*dy(sb)))
+    +int2d(Th)(s*sb/dt + aoxAlpha*u*s/(kox+s0)*sb + Per*Sv*s*sb)
+    -int2d(Th)(s0*sb/dt + Per*Sv*beta*sb + (1-controlS)*Sc*u*sb);

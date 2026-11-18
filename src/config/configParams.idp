@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Parametros de configuracion general
+////////////////////////////////////////////////////////////////////////////////////
+
+// Informacion de salida
+int simulationNumber = -1;               // Numero obligatorio de simulacion
+string fileName = "";                    // Se arma como Simulacion<nSimulacion>
+string changesInfo = "";                 // Cambios recibidos por CLI
+string paramsChangesInfo = "";           // Cambios de parametros numericos
+string commentText = "";                 // Comentario libre para el resumen
+string executionCommand = "";            // Comando completo usado para ejecutar
+
+// Modo de ejecucion
+bool onlyGrowth = false;                  // Modo de solo crecimiento
+string runFolderName = "";                // Nombre interno de la carpeta del modo
+string runModeLabel = "";                 // Nombre del modo
+
+// Visualizacion durante la simulacion
+bool showU = false;                       // Muestra u en cada paso temporal
+bool showSigma = false;                   // Muestra sigma en cada paso temporal
+
+// Malla
+string meshPath = "src/sources/axial.mesh";     // Malla del corte axial
+string loadControlsPath = "";              // Arranque de los controles. Se puede tomar con Controles_FuncionalMinimo.txt para retomar un experimento.
+
+// Rutas de resultados
+string folder = "";                       // Carpeta base results/<fileName>/
+string runFolder = "";                    // Carpeta results/<fileName>/<modo>/
+string imagesFolder = "";                 // Carpeta de imagenes
+string solutionsFolder = "";              // Carpeta de soluciones
+string summaryFile = "";                  // Archivo de resumen de la ejecucion
+string dataFile = "";                     // Archivo general de datos

@@ -1,0 +1,45 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Calculo del funcional J
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Evalua el funcional con la regla del trapecio.
+*/
+func real computeFunctional(real[int] &C, real[int] &S){
+    real sum1 = 0.;
+    real sum2 = 0.;
+    real sum3 = 0.;
+    real sum4 = 0.;
+
+    for(int i = 1; i <= nIter-1; i++)
+    {
+        u = uVec[i];
+        s = sVec[i];
+        sum1 += int2d(Th)(square(u));
+        sum4 += int2d(Th)(square(s - sigmaQ));
+    }
+
+    u = uVec[nIter];
+    s = sVec[nIter];
+    u0 = uVec[0];
+    s0 = sVec[0];
+
+    J1 = k1 * 0.5 * (dt * 0.5 * (int2d(Th)(square(u0)) + 2*sum1 + int2d(Th)(square(u))));
+    J2 = k2 * 0.5 * (dt * 0.5 * (int2d(Th)(square(s0 - sigmaQ)) + 2*sum4 + int2d(Th)(square(s - sigmaQ))));
+
+    sum2 = 0.;
+    sum3 = 0.;
+    for(int i = 1; i <= nIter - 1; i++)
+    {
+        sum2 += C[i];
+        sum3 += S[i];
+    }
+
+    J3 = l1 * 0.5 * int2d(Th)(square(u));
+    J4 = l2 * 0.5 * int2d(Th)(square(s - sigmaOmega));
+    J5 = k3 * (dt * 0.5 * (C[0] + 2*sum2 + C[nIter]));
+    J6 = k4 * (dt * 0.5 * (S[0] + 2*sum3 + S[nIter]));
+
+    J = J1 + J2 + J3 + J4 + J5 + J6;
+    return J;
+}

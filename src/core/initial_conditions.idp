@@ -1,0 +1,36 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Condiciones iniciales
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Construye las condiciones iniciales:
+    una gaussiana para tumor y dos gaussianas de oxigeno.
+*/
+func real buildInitialConditions(){
+    real centerX = xmin + Lx/2;
+    real centerY = ymin + Ly/2;
+    real sigmaWidth = gaussianSigmaRatio*max(1e-12, min(Lx, Ly));
+
+    // Tumor 
+    u0Initial = 0.6*exp(-((x-centerX)^2 + (y-centerY)^2)/(2*sigmaWidth^2));
+    u0Initial = truncateLower(u0Initial);       // Condición inicial positiva
+
+    // Oxigeno
+    real oxygenOffset = 0.2*Lx;                 // desplazamiento de la primera gaussiana
+    real oxygenX = min(xmax, centerX + oxygenOffset);
+    real oxygenY = min(ymax, centerY + oxygenOffset);
+    real sigmaOxygen = 0.8*sigmaWidth;         // Tamaño de la primera gaussiana
+
+    // La segunda gaussiana se ubica a partir de la primera
+    real oxygenX2 = min(xmax, centerX + 0.35*Lx);
+    real oxygenY2 = max(ymin, centerY - 0.25*Ly);
+    real sigmaOxygen2 = 0.25*sigmaWidth;       // Tamaño de la segunda gaussiana
+
+    // Asignacion de las gaussianas en una sola expresion
+    s0Initial = truncateUpperSigma(truncateLower(
+        0.7*beta*(1-0.3*u0Initial)
+        + beta*exp(-((x-oxygenX)^2 + (y-oxygenY)^2)/(2*sigmaOxygen^2))
+        + beta*exp(-((x-oxygenX2)^2 + (y-oxygenY2)^2)/(2*sigmaOxygen2^2))
+    ));
+    return 0.;
+}

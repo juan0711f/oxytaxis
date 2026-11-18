@@ -1,0 +1,84 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Parametros de discretizacion
+////////////////////////////////////////////////////////////////////////////////////
+
+real T = 2.;                              // Tiempo total
+int nIter = 250;                          // Numero de iteraciones temporales
+real dt = T/nIter;                        // Paso temporal calculado como T/nIter
+int nIter1 = nIter + 1;                   // Auxiliar para dimensionar vectores
+
+////////////////////////////////////////////////////////////////////////////////////
+// Parametros fisicos del modelo
+////////////////////////////////////////////////////////////////////////////////////
+
+// Constantes de la dinámica del tumor
+real Du = 2;                              // Difusion del tumor
+real alpha = 4;                           // Capacidad de carga del tumor
+real xhi = 10;                            // Fuerza de quimioatraccion
+real psi = 2;                             // Intensidad del control C en la ecuacion de u
+
+// Constantes de la dinamica del oxigeno
+real DSigma = 0.02;                       // Difusion del oxigeno
+real beta = 1;                            // Oxigeno maximo
+real Aox = 0.6;                           // Consumo tumoral de oxigeno
+real kox = 0.1;                           // Saturacion de consumo
+real Per = 0.1;                           // Aporte vascular
+real Sv = 1;                              // Densidad celular/capilar usada en el aporte
+real aoxAlpha = Aox*alpha^(-1);           // Aox/alpha
+real Sc = 0.4;                            // Produccion O angiogénesis controlada
+real alphaInv = alpha^(-1);               // Inverso de alpha
+
+// Constantes de la funcion rho
+real pmax = 3.5;                          // Tasa efectiva de crecimiento
+real b = 1;                               // Constante involucrada en rho
+real rhoPrime = alphaInv*((pmax/beta) - ((pmax*b)/beta));
+real sigmaQ = beta;                       // Sigma deseada en Q
+real sigmaOmega = beta;                   // Sigma deseada en T
+real gaussianSigmaRatio = 0.1;            // Ancho relativo de la gaussiana inicial
+real controlCMax = 1;                     // Limite superior para el control C
+
+////////////////////////////////////////////////////////////////////////////////////
+// Parametros del funcional
+////////////////////////////////////////////////////////////////////////////////////
+
+real k1 = 1;                              // Peso de u en Q
+real k2 = 1;                              // Peso de (sigma-sigmaQ)^2 en Q
+real k3 = 1;                              // Peso de C en Q
+real k4 = 1;                              // Peso de S en Q
+real l1 = 1;                              // Peso terminal de u
+real l2 = 1;                              // Peso terminal de sigma
+
+real J1, J2, J3, J4, J5, J6, J;           // Componentes del funcional
+
+////////////////////////////////////////////////////////////////////////////////////
+// Parametros geometricos y de control
+////////////////////////////////////////////////////////////////////////////////////
+
+real Lx, Ly;                              // Dimensiones del dominio
+real CT = 0.25;                           // Máximo valor para la integral de C
+
+////////////////////////////////////////////////////////////////////////////////////
+// Optimizador ADAM
+////////////////////////////////////////////////////////////////////////////////////
+
+int systemIterations = 0;                 // Iteraciones del algoritmo de control
+real minimumFunctional;                   // Mejor funcional encontrado
+int bestIteration = -1;
+real bestJ1, bestJ2, bestJ3, bestJ4, bestJ5, bestJ6;
+
+real tolAdam = 3e-5;                      // Tolerancia del criterio de parada
+real beta1Adam = 0.9;                     // Decaimiento del primer momento
+real beta2Adam = 0.999;                   // Decaimiento del segundo momento
+real epsilonAdam = 1e-8;                  // Estabilizador numerico
+real alpha0Adam = 0.1;                    // Longitud de paso
+
+real powBeta1 = 1;                        // Potencia acumulada beta1
+real powBeta2 = 1;                        // Potencia acumulada beta2
+real gradNorm = 0;                        // Norma infinita del gradiente discreto
+real kktResidual = 0., kktResidualC = 0., kktResidualS = 0., kktMu = 0.;
+real bestKktResidual = 0., bestKktResidualC = 0., bestKktResidualS = 0., bestKktMu = 0.;
+
+// -1 conserva el while(true). Valores >=0 llega hasta un máximo de iteraciones y es útil para pruebas cortas.
+int maxControlIterations = 400;
+
+real controlC, controlS;                  // Controles escalares en el paso temporal actual

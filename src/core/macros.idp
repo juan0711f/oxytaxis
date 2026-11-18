@@ -1,0 +1,12 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Macros
+////////////////////////////////////////////////////////////////////////////////////
+
+macro truncateUpperSigma(value) (min(value,beta)) //
+macro truncateLower(value) (max(value,0.)) //
+
+macro oxygenConsumption(value) (alphaInv*(value/(kox + value))) //
+macro tumorGrowth(value) (value*(alpha - value)) //
+macro tumorGrowthPrime(value) (alpha - 2*value) //
+macro oxygenConsumptionPrime(value) (alphaInv*(kox/((kox + value)*(kox + value)))) //
+macro rho(value) ((pmax/alpha)*((value/beta)+b*(1-(value/beta)))) //

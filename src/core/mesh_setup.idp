@@ -1,0 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Configuracion de malla y espacios de elementos finitos
+////////////////////////////////////////////////////////////////////////////////////
+
+mesh Th = readmesh(meshPath);
+fespace Vh(Th, P1);
+
+// bbox (boundary box) del dominio, para ubicar las condiciones iniciales.
+real xmin = 1e30, xmax = -1e30, ymin = 1e30, ymax = -1e30;
+for (int i = 0; i < Th.nv; i++)
+{
+    real xi = Th(i).x;
+    real yi = Th(i).y;
+    xmin = min(xmin, xi); xmax = max(xmax, xi);
+    ymin = min(ymin, yi); ymax = max(ymax, yi);
+}
+Lx = xmax - xmin;
+Ly = ymax - ymin;
+
+Vh u, s, w, z;                              // Variables de estado y adjuntas
+Vh u0, s0, wT, zT, u0Initial, s0Initial;    // Condiciones iniciales/finales
+Vh ub, sb, wb, zb;                          // Funciones test
+
+Vh[int] uVec(nIter1), sVec(nIter1), wVec(nIter1), zVec(nIter1);

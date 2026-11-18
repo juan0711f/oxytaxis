@@ -1,0 +1,352 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Algoritmo de control optimo
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Guarda los mejores controles encontrados durante el proceso de control, es decir,
+    aquellos controles asociados al menor valor del funcional J.
+*/
+func real updateBestControls(real currentJ){
+    if(systemIterations == 0 || currentJ < minimumFunctional)
+    {
+        minimumFunctional = currentJ;
+        bestIteration = systemIterations;
+        bestJ1 = J1; bestJ2 = J2; bestJ3 = J3; bestJ4 = J4; bestJ5 = J5; bestJ6 = J6;
+        bestKktResidual = kktResidual; bestKktResidualC = kktResidualC;
+        bestKktResidualS = kktResidualS; bestKktMu = kktMu;
+
+        for(int i = 0; i <= nIter; i++)
+        {
+            bestC[i] = C[i];
+            bestS[i] = S[i];
+        }
+
+        string bestFilename = runFolder + "Controles_FuncionalMinimo.txt";
+        ofstream bestFile(bestFilename);
+        bestFile.precision(12);
+
+        for(int i = 0; i <= nIter; i++)
+        {
+            bestFile << "C["<<i<<"]="<<bestC[i]<<", S["<<i<<"]="<<bestS[i]<<";\n";
+        }
+        bestFile << "Iteracion del funcional minimo: " << systemIterations << "\n";
+    }
+    return 0.;
+}
+
+/*
+    Ejecuta el algoritmo de control optimo:
+    Paso 1. resuelve estados,
+    Paso 2. resuelve adjuntos,
+    Paso 3. calcula gradientes,
+    Paso 4. evalua el funcional,
+    Paso 5. actualiza controles con ADAM.
+*/
+func real runOptimalControl(){
+    real executionStartSeconds = getEpochSeconds();         // Se guarda el tiempo inicial para medir la duracion total.
+
+    string residualFile = runFolder + "residuo_proyectado.txt";
+    {
+        ofstream residualStream(residualFile);
+        residualStream << "iter J residuoC residuoS residuo mu integralC gradNorm\n";
+    }
+
+    // criterio de parada
+    string stopReason = "maxControlIter alcanzado";         // Razon por defecto de parada cuando se usa un numero maximo de iteraciones.
+    bool stopByFunctionalCriterion = false;                 // Marca si el algoritmo se detuvo por el criterio de funcionales repetidos.
+    bool hasPreviousFunctional = false;                     // Indica si ya existe un funcional anterior para comparar.
+    real previousFunctionalForStop = 0.;                    // Guarda el funcional de la iteracion anterior para el criterio de parada.
+    int equalFunctionalStreak = 0;                          // Cuenta cuantos funcionales consecutivos han sido iguales.
+    int equalFunctionalTarget = 5;                          // Numero de funcionales consecutivos iguales requeridos para detenerse.
+
+    powBeta1 = 1.;
+    powBeta2 = 1.;
+
+    // Se inicializan los momentos de ADAM en cero.
+    for(int i = 0; i <= nIter; i++){
+        mU[i] = 0.; vU[i] = 0.;
+        mS[i] = 0.; vS[i] = 0.;
+    }
+
+    while(maxControlIterations < 0 || systemIterations < maxControlIterations)
+    {
+        cout<<"Iteracion del algoritmo #"<<systemIterations<<endl;
+        string iterFile = runFolder+"data_iter_"+systemIterations+".txt";
+        writeText(iterFile, "Iteracion del algoritmo #"+systemIterations, true);
+
+        // -----------------------------------------------------------------------------------------------
+        // Paso 1: se resuelven los estados con los controles actuales.
+        // -----------------------------------------------------------------------------------------------
+        system("mkdir -p " + imagesFolder + "Iter_"+systemIterations);
+        system("mkdir -p " + solutionsFolder + "Iter_"+systemIterations);
+        u0 = u0Initial;
+        s0 = s0Initial;
+        u = u0;
+        s = s0;
+        uVec[0] = u0;
+        sVec[0] = s0;
+        for(int m=1; m<= nIter; m++)
+        {
+            real year = m*dt;
+            controlS = S[m];
+            controlC = C[m];
+
+            tumorDensity;
+            // u = truncateLower(u);
+            nutrients;
+            // s0 = truncateLower(s);
+            s0 = s;
+            u0 = u;
+
+            if(showU) plot(u0, wait=0, WindowIndex=0, fill=1, value=1, cmm="u, iter control "+systemIterations+", paso "+m+", t="+year);
+            if(showSigma) plot(s0, wait=0, WindowIndex=1, fill=1, value=1, cmm="sigma, iter control "+systemIterations+", paso "+m+", t="+year);
+
+            uVec[m] = u0;
+            sVec[m] = s0;
+
+            real maxu, minu, maxs, mins;
+            maxu = u[].max;
+            minu = u[].min;
+            maxs = s[].max;
+            mins = s[].min;
+            if(minu < 0 || mins < 0) cout << "AVISO negativo: iter " << systemIterations << ", paso " << m << ", min u = " << minu << ", min sigma = " << mins << endl;
+            real tumorVolume = int2d(Th)(u0);
+            real spatialU2Integral = int2d(Th)(square(u0));
+            real spatialSigmaQIntegral = int2d(Th)(square(s0 - sigmaQ));
+            {
+                ofstream iterStream(iterFile, append);
+                iterStream.precision(12);
+                iterStream << "		Iteracion: " << m << ", Volumen: " << tumorVolume << ", Min u: " << minu << ", Max u: " << maxu << ", Min s: " << mins << ", Max s: " << maxs << ", Integral u^2: " << spatialU2Integral << ", Integral (sigma-sigmaQ)^2: " << spatialSigmaQIntegral << "\n";
+            }
+        }
+        
+        // -----------------------------------------------------------------------------------------------
+        // Paso 2: se resuelven los adjuntos hacia atras en el tiempo.
+        // -----------------------------------------------------------------------------------------------
+        wT = l1 * uVec[nIter];
+        zT = l2 * (sVec[nIter] - sigmaOmega);
+        wVec[nIter] = wT;
+        zVec[nIter] = zT;
+        for(int m = 1; m <= nIter; m++)
+        {
+            int i = nIter - m;
+            u = uVec[i];
+            s = sVec[i];
+            controlC = C[i];
+            controlS = S[i];
+
+            solve equationW(w,wb) = int2d(Th, optimize=2)(w*wb/dt + Du*(dx(w)*dx(wb)+dy(w)*dy(wb)) - rho(s)*tumorGrowthPrime(u)*w*wb - xhi*(dx(s)*dx(w)+dy(s)*dy(w))*wb + psi*controlC*s*w*wb)
+                                + int2d(Th, optimize=2)(-wT*wb/dt + Aox*oxygenConsumption(s)*zT*wb - (1 - controlS)*Sc*zT*wb - k1*u*wb);
+            solve equationZ(z,zb) = int2d(Th, optimize=2)(z*zb/dt + DSigma*(dx(z)*dx(zb)+dy(z)*dy(zb)) + Aox*u*oxygenConsumptionPrime(s)*z*zb + Per*Sv*z*zb)
+                                + int2d(Th, optimize=2)(-zT*zb/dt - rhoPrime*tumorGrowth(u)*w*zb - xhi*u*(dx(w)*dx(zb)+dy(w)*dy(zb)) - k2*(s-beta)*zb + psi*controlC*u*w*zb);
+
+            wT = w;
+            zT = z;
+            wVec[i] = wT;
+            zVec[i] = zT;
+        }
+
+        // -----------------------------------------------------------------------------------------------
+        // Paso 3: se calculan los gradientes discretos respecto a C y S.
+        // -----------------------------------------------------------------------------------------------
+        for(int m = 0; m <= nIter; m++)
+        {
+            controlC = C[m];
+            controlS = S[m];
+
+            u = uVec[m];
+            w = wVec[m];
+            z = zVec[m];
+            s = sVec[m];
+
+            real integralU = 0.;
+            real integralS = 0.;
+            if(m > 0)
+            {
+                integralU = int2d(Th)(psi*u*s*w);
+                integralS = int2d(Th)(Sc*u*z);
+            }
+
+            real trapezoidalWeight = (m == 0 || m == nIter) ? 0.5*dt : dt;
+
+            dU[m] = trapezoidalWeight*k3 - dt*integralU;
+            dS[m] = trapezoidalWeight*k4 - dt*integralS;
+
+            real auxiliary1 = dU[m];
+            real auxiliary2 = dS[m];
+            {
+                ofstream iterStream(iterFile, append);
+                iterStream.precision(12);
+                iterStream << "		dU: " << auxiliary1 << "; dS: " << auxiliary2 << "\n";
+            }
+        }
+
+        printControls(C, S, iterFile, dt, nIter);
+
+        // -----------------------------------------------------------------------------------------------
+        // Paso 4: se evalua el funcional y la norma del gradiente.
+        // -----------------------------------------------------------------------------------------------
+        gradNorm = 0.;
+
+        // Se calcula el maximo valor absoluto entre todos los gradientes discretos.
+        for(int i = 0; i <= nIter; i++)
+        {
+            gradNorm = max(gradNorm, abs(dU[i]));
+            gradNorm = max(gradNorm, abs(dS[i]));
+        }
+
+        real currentJ = computeFunctional(C, S);
+        computeProjectedResidual(C, S, dU, dS, nIter, dt, CT, controlCMax);
+        {
+            ofstream residualStream(residualFile, append);
+            residualStream.precision(12);
+            residualStream << systemIterations << " " << currentJ << " " << kktResidualC << " " << kktResidualS << " " << kktResidual << " " << kktMu << " " << integralTrapzC(C, dt, nIter) << " " << gradNorm << "\n";
+        }
+
+        if(hasPreviousFunctional)                       // Si ya existe un funcional anterior, se compara con el actual.
+        {
+            // Si la diferencia es menor que tolAdam, se aumenta la cantidad de funcionales seguidos iguales.
+            if(abs(currentJ - previousFunctionalForStop) <= tolAdam)
+            {
+                equalFunctionalStreak += 1;
+            }
+            else
+            {
+                equalFunctionalStreak = 1;          // Si aparece uno distinto, actualiza la cantidad de funcionales seguidos iguales.
+            }
+        }
+
+        // Si es el primer funcional calculado, empieza la cantidad de funcionales seguidos iguales como 1.
+        else
+        {
+            equalFunctionalStreak = 1;
+            hasPreviousFunctional = true;
+        }
+
+        previousFunctionalForStop = currentJ;           // Se actualiza el funcional anterior para la siguiente iteracion.
+
+        {
+            ofstream iterStream(iterFile, append);
+            iterStream.precision(12);
+            iterStream << "Funcional J: " << currentJ << " (J1: " << J1 << ", J2: " << J2 << ", J3: " << J3 << ", J4: " << J4 << ", J5: " << J5 << ", J6: " << J6 << ")\n";
+            iterStream << "Gradiente (max abs): " << gradNorm << ", J: " << currentJ << "\n";
+        }
+        {
+            ofstream summaryStream(summaryFile, append);
+            summaryStream.precision(12);
+            summaryStream << "Iteracion " << systemIterations << ": J=" << currentJ << ", gradNorm=" << gradNorm << ", residuo=" << kktResidual << ", funcionalesIguales=" << equalFunctionalStreak << "\n";
+        }
+
+        updateBestControls(currentJ);
+
+        // Si hay cinco funcionales consecutivos iguales, se detiene antes de actualizar controles.
+        if(equalFunctionalStreak >= equalFunctionalTarget)
+        {
+            stopByFunctionalCriterion = true;
+            stopReason = "5 funcionales consecutivos iguales";
+            real currentIntCStop = integralTrapzC(C, dt, nIter);
+            {
+                ofstream iterStream(iterFile, append);
+                iterStream.precision(12);
+                iterStream << "Integral temporal de C: " << currentIntCStop << "\n";
+                iterStream << "Criterio de parada: 5 funcionales consecutivos iguales con tolerancia tolAdam=" << tolAdam << "\n";
+            }
+            systemIterations += 1;
+            break;
+        }
+
+        // -----------------------------------------------------------------------------------------------
+        // Paso 5: actualizacion de controles con ADAM.
+        // -----------------------------------------------------------------------------------------------
+        writeText(iterFile, "\n\n[Paso 5] Actualizacion de controles con ADAM\n", false);
+        powBeta1 *= beta1Adam;
+        powBeta2 *= beta2Adam;
+        real[int] pU(nIter1), pS(nIter1);
+
+        for(int m = 0; m <= nIter; m++)
+        {
+            mU[m] = beta1Adam*mU[m] + (1 - beta1Adam)*dU[m];
+            vU[m] = beta2Adam*vU[m] + (1 - beta2Adam)*dU[m]*dU[m];
+            mS[m] = beta1Adam*mS[m] + (1 - beta1Adam)*dS[m];
+            vS[m] = beta2Adam*vS[m] + (1 - beta2Adam)*dS[m]*dS[m];
+
+            real mUhat = mU[m]/(1 - powBeta1);
+            real vUhat = vU[m]/(1 - powBeta2);
+            real mShat = mS[m]/(1 - powBeta1);
+            real vShat = vS[m]/(1 - powBeta2);
+
+            pU[m] = -mUhat/(sqrt(vUhat) + epsilonAdam);
+            pS[m] = -mShat/(sqrt(vShat) + epsilonAdam);
+        }
+
+        real stepLen = alpha0Adam;
+        for(int m = 0; m <= nIter; m++)
+        {
+            real deltaC = stepLen*pU[m];
+            real deltaS = stepLen*pS[m];
+
+            C[m] = min(max(C[m] + deltaC, 0.), controlCMax);
+            S[m] = min(max(S[m] + deltaS, 0.), 1.);
+        }
+
+        projectCIntegralConstraint(C, dt, nIter, controlCMax, CT);
+        real currentIntC = integralTrapzC(C, dt, nIter);
+
+        {
+            ofstream iterStream(iterFile, append);
+            iterStream.precision(12);
+            iterStream << "Integral temporal de C: " << currentIntC << "\n";
+            iterStream << "Capacidad de carga:" << alpha << "\n";
+            iterStream << "Tiempo: " << (nIter*dt) << "\n";
+        }
+
+        systemIterations += 1;
+    }
+
+    // Si maxControlIterations es cero, el bucle no corre y se explica en el resumen.
+    if(maxControlIterations == 0) stopReason = "maxControlIter alcanzado sin ejecutar iteraciones";
+    // Si no hubo limite y no paro por criterio, se deja una razón por defecto.
+    if(!stopByFunctionalCriterion && maxControlIterations < 0) stopReason = "ejecucion finalizada";
+
+    real executionEndSeconds = getEpochSeconds();                       // Tiempo final para medir duracion total.
+    real elapsedSeconds = executionEndSeconds - executionStartSeconds;  // Duracion total de la ejecucion de control optimo.
+
+    if(bestIteration >= 0)
+    {
+        for(int i = 0; i <= nIter; i++)
+        {
+            C[i] = bestC[i];
+            S[i] = bestS[i];
+        }
+
+        u0 = u0Initial;
+        s0 = s0Initial;
+        u = u0;
+        s = s0;
+        uVec[0] = u0;
+        sVec[0] = s0;
+        for(int m = 1; m <= nIter; m++)
+        {
+            controlS = S[m];
+            controlC = C[m];
+
+            tumorDensity;
+            // u = truncateLower(u);
+            nutrients;
+            // s0 = truncateLower(s);
+            s0 = s;
+            u0 = u;
+
+            uVec[m] = u0;
+            sVec[m] = s0;
+        }
+    }
+
+    writeText(summaryFile, "Fin de ejecucion. Iteraciones de control completadas: "+systemIterations+"\n", false);
+    writeOptimalControlFinalSummary(bestIteration, stopReason, equalFunctionalStreak, elapsedSeconds, bestJ1, bestJ2, bestJ3, bestJ4, bestJ5, bestJ6, minimumFunctional, bestC, bestS);
+    appendComputerInfoToSummary();
+    appendComputerInfoDetailsToSummary();
+    writeText(summaryFile, "============================================================\n\n", false);
+    
+    return 0.;
+}

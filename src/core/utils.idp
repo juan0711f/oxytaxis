@@ -1,0 +1,273 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Utilidades generales
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Recalcula parametros derivados despues de leer la CLI.
+*/
+func real recomputeParams(){
+    nIter1 = nIter + 1;
+    dt = T/nIter;
+    alphaInv = alpha^(-1);
+    aoxAlpha = Aox*alpha^(-1);
+    rhoPrime = alphaInv*((pmax/beta) - ((pmax*b)/beta));
+    sigmaQ = beta;
+    sigmaOmega = beta;
+    return 0.;
+}
+
+/*
+    Registra cambios de configuracion para el resumen.
+*/
+func real registerChange(string key, string valueText){
+    changesInfo = changesInfo + " - " + key + ": " + valueText + "\n";
+    return 0.;
+}
+
+/*
+    Registra cambios numericos para el resumen.
+*/
+func real registerParamChange(string key, string valueText){
+    paramsChangesInfo = paramsChangesInfo + " - " + key + ": " + valueText + "\n";
+    return 0.;
+}
+
+/*
+    Reconstruye el comando de ejecucion a partir de ARGV.
+*/
+func string buildCommand(){
+    string cmd = "";
+    int argc = ARGV.n;
+    for(int i=0; i<argc; i++){
+        if(i > 0) cmd = cmd + " ";
+        string cliArg = ARGV[i];
+        bool needsQuotes = (cliArg.find(" ") != -1) || (cliArg.find(",") != -1) || (cliArg.find(";") != -1);
+        if(needsQuotes)
+            cmd = cmd + "\"" + cliArg + "\"";
+        else
+            cmd = cmd + cliArg;
+    }
+    return cmd;
+}
+
+/*
+    Obtiene fecha y hora para el archivo de resumen.
+*/
+func string getDateTime(){
+    string dateLine = "";
+    string tempFile = runFolder + ".tmp_date.txt";
+    system("date \"+%Y-%m-%d %H:%M:%S\" > " + tempFile);
+    ifstream f(tempFile);
+    if(f.good()){
+        getline(f, dateLine);
+    }
+    system("rm -f " + tempFile);
+    return dateLine;
+}
+
+/*
+    Obtiene el tiempo Unix en segundos para medir duracion de ejecucion.
+*/
+func real getEpochSeconds(){
+    string secondsLine = "0";
+    string tempFile = runFolder + ".tmp_seconds.txt";
+    system("date \"+%s\" > " + tempFile);
+    ifstream f(tempFile);
+    if(f.good()){
+        getline(f, secondsLine);
+    }
+    system("rm -f " + tempFile);
+    return atof(secondsLine);
+}
+
+/*
+    Integral temporal por trapecios del control C.
+*/
+func real integralTrapzC(real[int] &controlVector, real timeStep, int steps)
+{
+    real total = 0.5*(controlVector[0] + controlVector[steps]);
+    for(int i=1; i<=steps-1; i++) total += controlVector[i];
+    return timeStep*total;
+}
+
+func real computeProjectedResidual(real[int] &controlC0, real[int] &controlS0, real[int] &gradC, real[int] &gradS, int steps, real timeStep, real budget, real controlMax)
+{
+    real[int] weights(steps+1);
+    weights[0] = 0.5*timeStep;
+    weights[steps] = 0.5*timeStep;
+    for(int i=1; i<=steps-1; i++) weights[i] = timeStep;
+
+    real residualS = 0.;
+    for(int i=0; i<=steps; i++)
+    {
+        real projected = min(max(controlS0[i] - gradS[i], 0.), 1.);
+        residualS = max(residualS, abs(controlS0[i] - projected));
+    }
+
+    real currentIntegral = integralTrapzC(controlC0, timeStep, steps);
+    real muUpper = 0.;
+    for(int i=0; i<=steps; i++) muUpper = max(muUpper, abs(gradC[i])/(weights[i] + 1e-30));
+    muUpper *= 1.1;
+
+    int scanSteps = 800;
+    if(currentIntegral < budget - 1e-12) scanSteps = 0;
+
+    real bestResidual = 1e30;
+    real bestMu = 0.;
+    for(int k=0; k<=scanSteps; k++)
+    {
+        real mu = 0.;
+        if(scanSteps > 0) mu = muUpper*k/scanSteps;
+        real residual = 0.;
+        for(int i=0; i<=steps; i++)
+        {
+            real projected = min(max(controlC0[i] - (gradC[i] + mu*weights[i]), 0.), controlMax);
+            residual = max(residual, abs(controlC0[i] - projected));
+        }
+        if(residual < bestResidual){ bestResidual = residual; bestMu = mu; }
+    }
+
+    kktResidualC = bestResidual;
+    kktResidualS = residualS;
+    kktMu = bestMu;
+    kktResidual = max(bestResidual, residualS);
+    return kktResidual;
+}
+
+/*
+    Proyecta C sobre 0 <= C <= controlMax y sobre la restriccion integral.
+*/
+func real projectCIntegralConstraint(real[int] &controlVector, real timeStep, int steps, real controlMax, real budget)
+{
+    // Primero se trunca punto a punto.
+    for(int i=0; i<=steps; i++) controlVector[i] = min(max(controlVector[i], 0.), controlMax);
+
+    // Si la integral ya cumple, no hay nada mas que hacer.
+    real currentIntegral = integralTrapzC(controlVector, timeStep, steps);
+    if(currentIntegral <= budget) return currentIntegral;
+
+    // Pesos de la regla trapezoidal.
+    real[int] weights(steps+1);
+    weights[0] = 0.5*timeStep;
+    weights[steps] = 0.5*timeStep;
+    for(int i=1; i<=steps-1; i++) weights[i] = timeStep;
+
+    // Biseccion en lambda.
+    real lambdaLow = 0.;
+    real lambdaHigh = 0.;
+    for(int i=0; i<=steps; i++) lambdaHigh = max(lambdaHigh, controlVector[i]/(weights[i] + 1e-30));
+    lambdaHigh *= 1.1;
+
+    for(int it=0; it<60; it++)
+    {
+        real lambda = 0.5*(lambdaLow + lambdaHigh);
+        real projectedIntegral = 0.;
+        for(int i=0; i<=steps; i++)
+        {
+            real value = controlVector[i] - lambda*weights[i];
+            value = min(max(value, 0.), controlMax);
+            projectedIntegral += weights[i]*value;
+        }
+        if(projectedIntegral > budget) lambdaLow = lambda; else lambdaHigh = lambda;
+    }
+
+    // Se aplica el lambda final.
+    for(int i=0; i<=steps; i++)
+    {
+        controlVector[i] = min(max(controlVector[i] - lambdaHigh*weights[i], 0.), controlMax);
+    }
+
+    return integralTrapzC(controlVector, timeStep, steps);
+}
+
+/*
+    Inicializa los controles
+*/
+func real initializeTemporalControls(real[int] &C, real[int] &S){
+    // Arranque con controles: si se paso -loadControls, se leen los controles de un
+    // Controles_FuncionalMinimo.txt previo en vez de construir el bang-bang inicial.
+    // Sirve para continuar una corrida que agoto maxControlIter sin repetirla entera.
+    if(loadControlsPath != "")
+    {
+        string pairsFile = runFolder + ".tmp_loadpairs.txt";
+        string tempFile  = runFolder + ".tmp_loadcontrols.txt";
+
+        // Extrae "C[i]=<c>, S[i]=<s>;" -> "<c> <s>", y antepone el numero de pasos leidos.
+        system("sed -n 's/^C\\[[0-9]*\\]=\\([^,]*\\), S\\[[0-9]*\\]=\\([^;]*\\);.*/\\1 \\2/p' \""
+               + loadControlsPath + "\" > " + pairsFile
+               + " && wc -l < " + pairsFile + " > " + tempFile
+               + " && cat " + pairsFile + " >> " + tempFile);
+
+        int loadedSteps = 0;
+        {
+            ifstream f(tempFile);
+            f >> loadedSteps;
+
+            if(loadedSteps != nIter+1)
+            {
+                cout << "Error: -loadControls leyo " << loadedSteps << " pasos temporales y se esperaban "
+                     << (nIter+1) << ".\n";
+                cout << "       Comprueba que '" << loadControlsPath << "' venga de una corrida con el mismo -nIter.\n";
+                exit(1);
+            }
+
+            for(int m = 0; m <= nIter; m++) f >> C[m] >> S[m];
+        }
+        system("rm -f " + pairsFile + " " + tempFile);
+
+        // Se reimponen las cotas y la restriccion integral por si el fichero viene de otra configuracion.
+        for(int m = 0; m <= nIter; m++)
+        {
+            C[m] = min(max(C[m], 0.), controlCMax);
+            S[m] = min(max(S[m], 0.), 1.);
+        }
+        projectCIntegralConstraint(C, dt, nIter, controlCMax, CT);
+
+        cout << "Controles iniciales cargados desde '" << loadControlsPath << "' ("
+             << (nIter+1) << " pasos). Integral de C = " << integralTrapzC(C, dt, nIter) << "\n";
+        return 0.;
+    }
+
+    for(int m = 0; m <= nIter; m++) {
+        C[m] = 0.;
+        S[m] = 0.2;
+    }
+
+    real integralC = CT;
+    int index = 0;
+    while(index <= nIter && integralC > 1e-12)
+    {
+        // Se calcula el control C como "bastante al inicio" (hasta completar
+        // la cantidad máxima de la integral) y luego 0. Para eso, se va asumiendo para cada
+        // paso de tiempo a C como 1 y se va calculando la integral, hasta que se complete el
+        // máximo de integral permitido, luego, deja a C como 0 en los tiempos restantes.
+        // Si es necesario, crea una fracción (si no alcanza a completarse CT asumiendo 1 en ese tiempo).
+        real timeWeight = dt;
+        if(index == 0 || index == nIter) timeWeight = 0.5*dt;
+
+        real fullCost = timeWeight*controlCMax;
+        if(integralC - fullCost >= -1e-12)
+        {
+            C[index] = controlCMax;
+            integralC -= fullCost;
+        }
+        else
+        {
+            C[index] = min(integralC/timeWeight, controlCMax);
+            integralC = 0.;
+        }
+        index += 1;
+    }
+    return 0.;
+}
+
+/*
+    Fuerza controles nulos en todos los pasos temporales.
+*/
+func real forceNoControls(real[int] &C, real[int] &S){
+    for(int m = 0; m <= nIter; m++) {
+        C[m] = 0.;
+        S[m] = 0.;
+    }
+    return 0.;
+}

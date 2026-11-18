@@ -1,0 +1,47 @@
+load "iovtk";
+load "medit";
+include "getARGV.idp";
+verbosity = 0;
+
+////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// CONFIGURACION CENTRAL ///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
+include "src/config/configParams.idp";         // Variables de configuracion general
+include "src/config/modelParams.idp";          // Parametros del modelo y del optimizador
+include "src/core/macros.idp";                 // Macros matematicas
+include "src/core/utils.idp";                  // Utilidades generales
+include "src/core/cli.idp";                    // Interfaz de linea de comandos
+
+bool shouldRun = cli();                 // Configuracion de CLI; false cuando solo se imprime ayuda
+executionCommand = buildCommand();      // Para guardar el comando usado
+
+if(shouldRun && checkExecution(shouldRun))
+{
+    validateCLIParams();        // Valida los parámetros entrados por CLI
+    recomputeParams();          // Reconfigura los parámetros ingresados
+
+    // Vectores dependientes del numero de pasos temporales.
+    real[int] C(nIter1), S(nIter1), dU(nIter1), dS(nIter1);         // Almacenamiento de los controles y sus gradientes
+    real[int] bestC(nIter1), bestS(nIter1);                         // Guarda el mejor control
+    real[int] mU(nIter1), vU(nIter1), mS(nIter1), vS(nIter1);       // Valores de los controles para Adam
+
+    include "src/core/mesh_setup.idp";                  // Configuración de malla
+    include "src/core/initial_conditions.idp";          // Configuración de condiciones iniciales
+    include "src/core/edp_problem.idp";                 // Configuración del solve para el sistema EDP
+    include "src/core/functional.idp";                  // Configuración del funcional de costo
+    include "src/core/logs_utils.idp";                  // Escritura de logs y resumen
+
+    configureFolders();                                 // Configura las carpetas para guardar los resultados
+
+    include "src/modes/solo_crecimiento.idp";           // Modo de solo crecimiento
+    include "src/modes/optimal_control.idp";            // Algoritmo de control óptimo
+
+    buildInitialConditions();               // Crea las condiciones iniciales
+    initializeTemporalControls(C, S);       // Crea los controles iniciales
+
+    if(onlyGrowth)
+        runGrowthOnly();        // Ejecuta solo la ecuacion de estados
+    else
+        runOptimalControl();    // Ejecuta el problema de control optimo
+}

@@ -1,0 +1,80 @@
+////////////////////////////////////////////////////////////////////////////////////
+// Ejecucion en modo solo crecimiento
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    Resuelve solo las ecuaciones de estado sin control.
+*/
+func real runGrowthOnly(){
+    writeText(dataFile, "Ejecucion en modo solo crecimiento", true);
+
+    // En este modo se estudia el crecimiento sin aplicar controles.
+    forceNoControls(C, S);
+
+    u0 = u0Initial;
+    s0 = s0Initial;
+    u = u0;
+    s = s0;
+    uVec[0] = u0;
+    sVec[0] = s0;
+
+    for(int m=1; m<= nIter; m++)
+    {
+        real year = m*dt;
+        controlS = S[m];
+        controlC = C[m];
+
+        tumorDensity;
+        // u = truncateLower(u);
+        nutrients;
+        // s0 = truncateLower(s);
+        s0 = s;
+        u0 = u;
+
+        if(showU) plot(u0, wait=0, WindowIndex=0, fill=1, value=1, cmm="u, paso "+m+", t="+year);
+        if(showSigma) plot(s0, wait=0, WindowIndex=1, fill=1, value=1, cmm="sigma, paso "+m+", t="+year);
+
+        uVec[m] = u0;
+        sVec[m] = s0;
+
+        real maxu, minu, maxs, mins;
+        maxu = u[].max;
+        minu = u[].min;
+        maxs = s[].max;
+        mins = s[].min;
+        if(minu < 0 || mins < 0) cout << "AVISO negativo: paso " << m << ", min u = " << minu << ", min sigma = " << mins << endl;
+
+        real tumorVolume = int2d(Th)(u0);
+        real spatialU2Integral = int2d(Th)(square(u0));
+        real spatialSigmaQIntegral = int2d(Th)(square(s0 - sigmaQ));
+        {
+            ofstream dataStream(dataFile, append);
+            dataStream.precision(12);
+            dataStream << "Iteracion: " << m << ", Volumen: " << tumorVolume << ", Min u: " << minu << ", Max u: " << maxu << ", Min s: " << mins << ", Max s: " << maxs << ", Integral u^2: " << spatialU2Integral << ", Integral (sigma-sigmaQ)^2: " << spatialSigmaQIntegral << "\n";
+        }
+    }
+
+    real currentJ = computeFunctional(C, S);
+    real currentIntC = integralTrapzC(C, dt, nIter);
+
+    {
+        ofstream dataStream(dataFile, append);
+        dataStream.precision(12);
+        dataStream << "\n ========= Funcional J: " << currentJ << " (J1: " << J1 << ", J2: " << J2 << ", J3: " << J3 << ", J4: " << J4 << ", J5: " << J5 << ", J6: " << J6 << ")\n ========= \n";
+    }
+    {
+        ofstream dataStream(dataFile, append);
+        dataStream.precision(12);
+        dataStream << "Integral temporal de C: " << currentIntC << "\n";
+    }
+    printControls(C, S, dataFile, dt, nIter);
+
+    writeText(summaryFile, "Resumen final:\n", false);
+    {
+        ofstream summaryStream(summaryFile, append);
+        summaryStream.precision(12);
+        summaryStream << " - Funcional J: " << currentJ << "\n";
+        summaryStream << " - Integral temporal de C: " << currentIntC << "\n";
+    }
+    return 0.;
+}

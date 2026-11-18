@@ -1,0 +1,149 @@
+/*
+    Estabilidad del funcional alrededor del control optimo.
+
+    Se toma el control optimo de una simulacion ya ejecutada, se perturba
+    sumando una constante a C (o a S), se reproyecta sobre el conjunto
+    admisible y se reevalua el funcional discreto J resolviendo el sistema
+    de estados. Sirve para las figuras J(c + pert) y J(s + pert).
+
+    Uso:
+        FreeFem++ -nw estabilidad_funcional.edp -nSimulacion 1 -CT 0.25 -psi 2 -l1 1 -l2 1
+*/
+
+load "iovtk";
+load "medit";
+include "getARGV.idp";
+verbosity = 0;
+
+include "src/config/configParams.idp";
+include "src/config/modelParams.idp";
+include "src/core/macros.idp";
+include "src/core/utils.idp";
+
+// ---------------------------------------------------------------------------
+// Parametros de la corrida (se leen de la linea de comandos)
+// ---------------------------------------------------------------------------
+simulationNumber = getARGV("-nSimulacion", 1);
+CT   = getARGV("-CT", 0.25);
+psi  = getARGV("-psi", 2.);
+l1   = getARGV("-l1", 1.);
+l2   = getARGV("-l2", 1.);
+string outFolder = getARGV("-out", "results/EstabilidadFuncional/");
+// -noProject: aplica solo las cotas puntuales 0 <= c <= 1 y NO reproyecta sobre la
+// restriccion integral. Para pert > 0 el control perturbado usa mas terapia que la
+// permitida por c_max, es decir, sale del conjunto admisible.
+bool reprojectBudget = (usedARGV("-noProject") < 0);
+
+fileName  = "Simulacion" + simulationNumber;
+folder    = "results/" + fileName + "/";
+runFolder = outFolder;
+loadControlsPath = folder + "optimalControl/Controles_FuncionalMinimo.txt";
+
+recomputeParams();
+
+system("mkdir -p " + outFolder);
+string filename = outFolder + "data.txt";
+
+real[int] C(nIter1), S(nIter1), Caux(nIter1), Saux(nIter1);
+
+include "src/core/mesh_setup.idp";
+include "src/core/initial_conditions.idp";
+include "src/core/edp_problem.idp";
+include "src/core/functional.idp";
+
+buildInitialConditions();
+initializeTemporalControls(C, S);       // carga el control optimo (loadControlsPath)
+
+// ---------------------------------------------------------------------------
+// Encabezado del archivo de datos
+// ---------------------------------------------------------------------------
+{
+    ofstream f(filename);
+    f << "============================================================\n";
+    f << " Estabilidad del funcional alrededor del control optimo\n";
+    f << "============================================================\n";
+    f << " Control base: " << loadControlsPath << "\n";
+    f << "------------------------------------------------------------\n";
+    f << " Se perturba el control optimo sumando una constante a C o a S\n";
+    f << " y se reevalua el funcional discreto J con el sistema de estados.\n";
+    f << "------------------------------------------------------------\n";
+    f << " Parametros del modelo\n";
+    f << "   - Du: " << Du << ", alpha: " << alpha << ", beta: " << beta << ", xhi: " << xhi << ", psi: " << psi << "\n";
+    f << "   - DSigma: " << DSigma << ", Aox: " << Aox << ", kox: " << kox << ", Per: " << Per << ", Sv: " << Sv << ", Sc: " << Sc << "\n";
+    f << "   - pmax: " << pmax << ", b: " << b << ", CT: " << CT << ", cmax: " << controlCMax << "\n";
+    f << " Pesos funcional\n";
+    f << "   - k1: " << k1 << ", k2: " << k2 << ", k3: " << k3 << ", k4: " << k4 << "\n";
+    f << "   - l1: " << l1 << ", l2: " << l2 << "\n";
+    f << " Discretizacion\n";
+    f << "   - nIter: " << nIter << ", dt: " << dt << ", T: " << T << "\n";
+    f << "============================================================\n\n";
+}
+
+// ---------------------------------------------------------------------------
+// Evaluacion del funcional para un control perturbado
+// ---------------------------------------------------------------------------
+func real evaluatePerturbation(real deltaC, real deltaS)
+{
+    for(int m = 0; m <= nIter; m++)
+    {
+        Caux[m] = min(max(C[m] + deltaC, 0.), controlCMax);
+        Saux[m] = min(max(S[m] + deltaS, 0.), 1.);
+    }
+    if(reprojectBudget) projectCIntegralConstraint(Caux, dt, nIter, controlCMax, CT);
+
+    u0 = u0Initial;
+    s0 = s0Initial;
+    u = u0;
+    s = s0;
+    uVec[0] = u0;
+    sVec[0] = s0;
+    for(int m = 1; m <= nIter; m++)
+    {
+        controlS = Saux[m];
+        controlC = Caux[m];
+
+        tumorDensity;
+        nutrients;
+        s0 = s;
+        u0 = u;
+
+        uVec[m] = u0;
+        sVec[m] = s0;
+    }
+
+    real currentJ = computeFunctional(Caux, Saux);
+    {
+        ofstream f(filename, append);
+        f.precision(12);
+        f << "CambioC: " << deltaC << ", CambioS: " << deltaS << "\n";
+        f << "Funcional J: " << currentJ << " (J1: " << J1 << ", J2: " << J2 << ", J3: " << J3
+          << ", J4: " << J4 << ", J5: " << J5 << ", J6: " << J6 << ")\n\n";
+    }
+    cout << "  pert C = " << deltaC << ", pert S = " << deltaS << "  ->  J = " << currentJ << endl;
+    return currentJ;
+}
+
+// ---------------------------------------------------------------------------
+// Barridos de perturbacion
+// ---------------------------------------------------------------------------
+real[int] pertC = [-0.0005, -0.0004, -0.0003, -0.0002, -0.0001, 0., 0.005, 0.01, 0.015, 0.02, 0.025, 0.03];
+real[int] pertCpos = [0.005, 0.01, 0.015, 0.02, 0.025, 0.03];
+real[int] pertS = [-0.04, -0.035, -0.03, -0.025, -0.02, -0.015, -0.01, -0.005, 0., 0.001, 0.002, 0.003, 0.004, 0.005, 0.006];
+
+// -soloCpos: recalcula unicamente la rama positiva de C. Con pert <= 0 la restriccion
+// integral nunca se activa, asi que esa rama no depende de -noProject y se reutiliza.
+bool onlyPositiveC = (usedARGV("-soloCpos") >= 0);
+
+cout << "== Perturbaciones sobre el control C ==" << endl;
+if(onlyPositiveC)
+    for(int i = 0; i < pertCpos.n; i++) evaluatePerturbation(pertCpos[i], 0.);
+else
+    for(int i = 0; i < pertC.n; i++) evaluatePerturbation(pertC[i], 0.);
+
+if(!onlyPositiveC)
+{
+    cout << "== Perturbaciones sobre el control S ==" << endl;
+    for(int i = 0; i < pertS.n; i++) evaluatePerturbation(0., pertS[i]);
+}
+
+cout << "Listo. Datos en " << filename << endl;
