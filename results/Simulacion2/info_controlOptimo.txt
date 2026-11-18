@@ -1,0 +1,754 @@
+============================================================
+ Resumen de ejecucion
+============================================================
+ Simulacion : Simulacion2
+ Modo       : control optimo
+ Comando    : FreeFem++ -nw code.edp -nSimulacion 2 -CT 0.25 -psi 2 -l1 0 -l2 0 -maxControlIter 600 -c "Experimento 2 (c_max = 0.25, kappa = 2), caso l_j = 0"
+ Fecha/Hora : 2026-08-28 22:10:12
+ Comentario : Experimento 2 (c_max = 0.25, kappa = 2), caso l_j = 0
+------------------------------------------------------------
+ Rutas
+   - Base       : results/Simulacion2/
+   - Ejecucion  : results/Simulacion2/optimalControl/
+   - Imagenes   : results/Simulacion2/optimalControl/images/
+   - Soluciones : results/Simulacion2/optimalControl/solutions/
+   - Malla      : src/sources/axial.mesh
+------------------------------------------------------------
+ Discretizacion
+   - nIter: 250
+   - dt: 0.008
+   - T: 2
+   - maxControlIter: 600
+------------------------------------------------------------
+ Parametros del modelo
+   - Du: 2, alpha: 4, beta: 1, xhi: 10, psi: 2
+   - DSigma: 0.02, Aox: 0.6, kox: 0.1, Per: 0.1, Sv: 1, Sc: 0.4
+   - pmax: 3.5, b: 1, CT: 0.25, cmax: 1
+ Pesos funcional
+   - k1: 1, k2: 1, k3: 1, k4: 1
+   - l1: 0, l2: 0
+ Optimizador
+   - alpha0Adam: 0.1, beta1Adam: 0.9, beta2Adam: 0.999, epsilonAdam: 1e-08
+------------------------------------------------------------
+ Cambios CLI
+ - nSimulacion: 2
+ - comentario: Experimento 2 (c_max = 0.25, kappa = 2), caso l_j = 0
+ Cambios de parametros
+ - CT: 0.25
+ - psi: 2
+ - l1: 0
+ - l2: 0
+ - maxControlIter: 600
+============================================================
+
+Iteracion 0: J=3.91500702891, gradNorm=0.0675842132568, residuo=0.0675842132568, funcionalesIguales=1
+Iteracion 1: J=3.67685372233, gradNorm=0.028094364824, residuo=0.0124367121487, funcionalesIguales=1
+Iteracion 2: J=3.60174582351, gradNorm=0.0264270319369, residuo=0.0114854567961, funcionalesIguales=1
+Iteracion 3: J=3.5910519891, gradNorm=0.0258230889014, residuo=0.0112788831841, funcionalesIguales=1
+Iteracion 4: J=3.56879397014, gradNorm=0.0256502903826, residuo=0.0112252083287, funcionalesIguales=1
+Iteracion 5: J=3.53546859819, gradNorm=0.0256976302, residuo=0.0112435195126, funcionalesIguales=1
+Iteracion 6: J=3.50295890397, gradNorm=0.0258377803299, residuo=0.0112830243305, funcionalesIguales=1
+Iteracion 7: J=3.47115796, gradNorm=0.026028855371, residuo=0.0102726773267, funcionalesIguales=1
+Iteracion 8: J=3.44198286643, gradNorm=0.0262519885076, residuo=0.010528906049, funcionalesIguales=1
+Iteracion 9: J=3.41419195149, gradNorm=0.0264774986777, residuo=0.0107612393487, funcionalesIguales=1
+Iteracion 10: J=3.38846135593, gradNorm=0.0266936942223, residuo=0.0109005680098, funcionalesIguales=1
+Iteracion 11: J=3.36510348862, gradNorm=0.0268916368547, residuo=0.0109051576349, funcionalesIguales=1
+Iteracion 12: J=3.34455112328, gradNorm=0.0270663953389, residuo=0.0107191936351, funcionalesIguales=1
+Iteracion 13: J=3.32680221722, gradNorm=0.0272151610098, residuo=0.0103988617523, funcionalesIguales=1
+Iteracion 14: J=3.31138273981, gradNorm=0.0273311102301, residuo=0.0100136735322, funcionalesIguales=1
+Iteracion 15: J=3.29791837223, gradNorm=0.0274138993334, residuo=0.00948085570722, funcionalesIguales=1
+Iteracion 16: J=3.28614205847, gradNorm=0.027455297995, residuo=0.00929705028355, funcionalesIguales=1
+Iteracion 17: J=3.27543613411, gradNorm=0.0274516313024, residuo=0.00934372891553, funcionalesIguales=1
+Iteracion 18: J=3.26524738759, gradNorm=0.0274026528142, residuo=0.00939225925207, funcionalesIguales=1
+Iteracion 19: J=3.25529589494, gradNorm=0.0273067548979, residuo=0.00943448381722, funcionalesIguales=1
+Iteracion 20: J=3.24552049993, gradNorm=0.0271707086271, residuo=0.00946730535556, funcionalesIguales=1
+Iteracion 21: J=3.23573455518, gradNorm=0.0270009407459, residuo=0.00951353507747, funcionalesIguales=1
+Iteracion 22: J=3.22598883922, gradNorm=0.0268091596968, residuo=0.00952210433839, funcionalesIguales=1
+Iteracion 23: J=3.21649856022, gradNorm=0.0265984523249, residuo=0.00955549399771, funcionalesIguales=1
+Iteracion 24: J=3.20722430115, gradNorm=0.0263778844879, residuo=0.00955992372286, funcionalesIguales=1
+Iteracion 25: J=3.19811927594, gradNorm=0.026152135056, residuo=0.00957495044739, funcionalesIguales=1
+Iteracion 26: J=3.18918291132, gradNorm=0.0259227885284, residuo=0.0095622686184, funcionalesIguales=1
+Iteracion 27: J=3.18050679818, gradNorm=0.0256897086545, residuo=0.00955736697886, funcionalesIguales=1
+Iteracion 28: J=3.17188993188, gradNorm=0.0254607639458, residuo=0.0095491922223, funcionalesIguales=1
+Iteracion 29: J=3.16325499215, gradNorm=0.0252354433006, residuo=0.00953329193883, funcionalesIguales=1
+Iteracion 30: J=3.15480606512, gradNorm=0.0250261090607, residuo=0.00950679317942, funcionalesIguales=1
+Iteracion 31: J=3.14667778473, gradNorm=0.0248398627987, residuo=0.00948630734076, funcionalesIguales=1
+Iteracion 32: J=3.13845211358, gradNorm=0.0246615852067, residuo=0.00946111583919, funcionalesIguales=1
+Iteracion 33: J=3.1301535228, gradNorm=0.0244884922355, residuo=0.00942966742442, funcionalesIguales=1
+Iteracion 34: J=3.12187890488, gradNorm=0.0243216324083, residuo=0.00939262429481, funcionalesIguales=1
+Iteracion 35: J=3.11354558578, gradNorm=0.0241507614093, residuo=0.00935546617948, funcionalesIguales=1
+Iteracion 36: J=3.10533598273, gradNorm=0.0239867194312, residuo=0.00931413070285, funcionalesIguales=1
+Iteracion 37: J=3.09695876707, gradNorm=0.0238193564096, residuo=0.00927763932152, funcionalesIguales=1
+Iteracion 38: J=3.0887164459, gradNorm=0.023658011481, residuo=0.00924732523765, funcionalesIguales=1
+Iteracion 39: J=3.08037894846, gradNorm=0.0234922746453, residuo=0.00921484472963, funcionalesIguales=1
+Iteracion 40: J=3.07222108332, gradNorm=0.0233313236028, residuo=0.00917296791609, funcionalesIguales=1
+Iteracion 41: J=3.06392529644, gradNorm=0.0231655797683, residuo=0.00913007691192, funcionalesIguales=1
+Iteracion 42: J=3.05565723204, gradNorm=0.0230019149811, residuo=0.00908575641755, funcionalesIguales=1
+Iteracion 43: J=3.04745119907, gradNorm=0.0228406752128, residuo=0.00905347263748, funcionalesIguales=1
+Iteracion 44: J=3.03915226724, gradNorm=0.0226735182406, residuo=0.0090183918802, funcionalesIguales=1
+Iteracion 45: J=3.03083758931, gradNorm=0.0225053874149, residuo=0.00898246275196, funcionalesIguales=1
+Iteracion 46: J=3.02253813417, gradNorm=0.0223380777422, residuo=0.00894468326669, funcionalesIguales=1
+Iteracion 47: J=3.01417804939, gradNorm=0.0221696863518, residuo=0.00890320611979, funcionalesIguales=1
+Iteracion 48: J=3.00572685799, gradNorm=0.021997705043, residuo=0.00886252812541, funcionalesIguales=1
+Iteracion 49: J=2.99724158352, gradNorm=0.0218247420004, residuo=0.00882244823741, funcionalesIguales=1
+Iteracion 50: J=2.98872091808, gradNorm=0.0216514626021, residuo=0.00878326319839, funcionalesIguales=1
+Iteracion 51: J=2.98008921348, gradNorm=0.0214758800671, residuo=0.00874638348893, funcionalesIguales=1
+Iteracion 52: J=2.97140624955, gradNorm=0.0213000538153, residuo=0.00870639699701, funcionalesIguales=1
+Iteracion 53: J=2.96264839498, gradNorm=0.0211217839645, residuo=0.00866257164845, funcionalesIguales=1
+Iteracion 54: J=2.95379958965, gradNorm=0.0209391233547, residuo=0.00861644926045, funcionalesIguales=1
+Iteracion 55: J=2.94491266767, gradNorm=0.0207564358452, residuo=0.00857115184056, funcionalesIguales=1
+Iteracion 56: J=2.93592398615, gradNorm=0.0205723591032, residuo=0.00853744934373, funcionalesIguales=1
+Iteracion 57: J=2.9268435396, gradNorm=0.0203866544292, residuo=0.00850123489697, funcionalesIguales=1
+Iteracion 58: J=2.91773727854, gradNorm=0.0202036876242, residuo=0.00845271780976, funcionalesIguales=1
+Iteracion 59: J=2.90852316299, gradNorm=0.0201520841935, residuo=0.00840388888353, funcionalesIguales=1
+Iteracion 60: J=2.89920000851, gradNorm=0.0202620651558, residuo=0.00836808099504, funcionalesIguales=1
+Iteracion 61: J=2.88976780014, gradNorm=0.02037247398, residuo=0.00832481735136, funcionalesIguales=1
+Iteracion 62: J=2.88023835751, gradNorm=0.0204803774866, residuo=0.00827063363193, funcionalesIguales=1
+Iteracion 63: J=2.87062793661, gradNorm=0.020590086222, residuo=0.00823684884897, funcionalesIguales=1
+Iteracion 64: J=2.86093142671, gradNorm=0.0206954210012, residuo=0.00818563340021, funcionalesIguales=1
+Iteracion 65: J=2.85117463238, gradNorm=0.0207920309155, residuo=0.00813909507057, funcionalesIguales=1
+Iteracion 66: J=2.84134790755, gradNorm=0.0208856348295, residuo=0.00809892991521, funcionalesIguales=1
+Iteracion 67: J=2.83177009157, gradNorm=0.0209764456272, residuo=0.00789110412602, funcionalesIguales=1
+Iteracion 68: J=2.82216616775, gradNorm=0.0210674926044, residuo=0.00779776779457, funcionalesIguales=1
+Iteracion 69: J=2.81265940278, gradNorm=0.0211564370509, residuo=0.00773228629116, funcionalesIguales=1
+Iteracion 70: J=2.80479040459, gradNorm=0.0212405942405, residuo=0.00764713510353, funcionalesIguales=1
+Iteracion 71: J=2.80109365947, gradNorm=0.0213182225956, residuo=0.0073573412698, funcionalesIguales=1
+Iteracion 72: J=2.80005649706, gradNorm=0.0213944297427, residuo=0.00442306996946, funcionalesIguales=1
+Iteracion 73: J=2.7992746988, gradNorm=0.0214626203215, residuo=0.00434175015835, funcionalesIguales=1
+Iteracion 74: J=2.79859608451, gradNorm=0.0215212404392, residuo=0.00426766373684, funcionalesIguales=1
+Iteracion 75: J=2.79796899613, gradNorm=0.0215778469948, residuo=0.00419803479669, funcionalesIguales=1
+Iteracion 76: J=2.79742245288, gradNorm=0.0216282197952, residuo=0.0042023654688, funcionalesIguales=1
+Iteracion 77: J=2.79689866028, gradNorm=0.0216811913072, residuo=0.00412427822342, funcionalesIguales=1
+Iteracion 78: J=2.79641133601, gradNorm=0.0217349615204, residuo=0.00412131635594, funcionalesIguales=1
+Iteracion 79: J=2.7959862495, gradNorm=0.0217820499365, residuo=0.00404724099227, funcionalesIguales=1
+Iteracion 80: J=2.79558830945, gradNorm=0.0218282780652, residuo=0.00405630307203, funcionalesIguales=1
+Iteracion 81: J=2.79519957272, gradNorm=0.0218738488635, residuo=0.0039818573833, funcionalesIguales=1
+Iteracion 82: J=2.79484976451, gradNorm=0.0219158055578, residuo=0.00398297794235, funcionalesIguales=1
+Iteracion 83: J=2.79454382362, gradNorm=0.0219522759673, residuo=0.00397994381556, funcionalesIguales=1
+Iteracion 84: J=2.79424169952, gradNorm=0.0219880715349, residuo=0.00390441382038, funcionalesIguales=1
+Iteracion 85: J=2.79394899014, gradNorm=0.0220230115097, residuo=0.00390169253046, funcionalesIguales=1
+Iteracion 86: J=2.79367548032, gradNorm=0.0220568874223, residuo=0.00390797081716, funcionalesIguales=1
+Iteracion 87: J=2.79340502488, gradNorm=0.0220899980994, residuo=0.00391443581702, funcionalesIguales=1
+Iteracion 88: J=2.7931637647, gradNorm=0.0221176426199, residuo=0.00383275056781, funcionalesIguales=1
+Iteracion 89: J=2.79294553762, gradNorm=0.0221399608903, residuo=0.00383595634054, funcionalesIguales=1
+Iteracion 90: J=2.79276098733, gradNorm=0.0221580256465, residuo=0.00383879666433, funcionalesIguales=1
+Iteracion 91: J=2.792578086, gradNorm=0.0221755204189, residuo=0.00384136099609, funcionalesIguales=1
+Iteracion 92: J=2.79239687008, gradNorm=0.0221924714183, residuo=0.00384049199232, funcionalesIguales=1
+Iteracion 93: J=2.79221738577, gradNorm=0.0222089035279, residuo=0.0037583662974, funcionalesIguales=1
+Iteracion 94: J=2.79204758555, gradNorm=0.0222246589345, residuo=0.00376031993605, funcionalesIguales=1
+Iteracion 95: J=2.79189153614, gradNorm=0.022239666953, residuo=0.00376223265496, funcionalesIguales=1
+Iteracion 96: J=2.79173744908, gradNorm=0.0222542202944, residuo=0.0037636300907, funcionalesIguales=1
+Iteracion 97: J=2.7915853756, gradNorm=0.0222683390507, residuo=0.00376254547087, funcionalesIguales=1
+Iteracion 98: J=2.79144366973, gradNorm=0.0222799668091, residuo=0.00367723455764, funcionalesIguales=1
+Iteracion 99: J=2.79131396964, gradNorm=0.0222893398137, residuo=0.0036767786584, funcionalesIguales=1
+Iteracion 100: J=2.79120186439, gradNorm=0.0222979871193, residuo=0.00367641387703, funcionalesIguales=1
+Iteracion 101: J=2.79109162717, gradNorm=0.0223063250085, residuo=0.00367585517524, funcionalesIguales=1
+Iteracion 102: J=2.79098336671, gradNorm=0.0223143671384, residuo=0.00367511057529, funcionalesIguales=1
+Iteracion 103: J=2.79087718701, gradNorm=0.0223221260155, residuo=0.00367418780585, funcionalesIguales=1
+Iteracion 104: J=2.79076993108, gradNorm=0.0223301011278, residuo=0.00358814941208, funcionalesIguales=1
+Iteracion 105: J=2.79062773211, gradNorm=0.0223440328994, residuo=0.00358712789939, funcionalesIguales=1
+Iteracion 106: J=2.7904977334, gradNorm=0.0223577162778, residuo=0.00358616784272, funcionalesIguales=1
+Iteracion 107: J=2.79036763213, gradNorm=0.0223713447068, residuo=0.00358611601509, funcionalesIguales=1
+Iteracion 108: J=2.79023745594, gradNorm=0.0223849036826, residuo=0.00358673282949, funcionalesIguales=1
+Iteracion 109: J=2.79010723354, gradNorm=0.0223983799749, residuo=0.00358724562338, funcionalesIguales=1
+Iteracion 110: J=2.78997699457, gradNorm=0.0224117615747, residuo=0.00358777460128, funcionalesIguales=1
+Iteracion 111: J=2.78984676954, gradNorm=0.0224250376405, residuo=0.00350922403166, funcionalesIguales=1
+Iteracion 112: J=2.78972420348, gradNorm=0.0224379759858, residuo=0.00350829180338, funcionalesIguales=1
+Iteracion 113: J=2.78960960786, gradNorm=0.0224505588978, residuo=0.00350740370656, funcionalesIguales=1
+Iteracion 114: J=2.78949509591, gradNorm=0.0224630095878, residuo=0.00350650697133, funcionalesIguales=1
+Iteracion 115: J=2.78938069095, gradNorm=0.0224753213995, residuo=0.00350560273535, funcionalesIguales=1
+Iteracion 116: J=2.78926641778, gradNorm=0.0224874885675, residuo=0.00350469205561, funcionalesIguales=1
+Iteracion 117: J=2.78915230259, gradNorm=0.0224995061603, residuo=0.00350377591245, funcionalesIguales=1
+Iteracion 118: J=2.78903837286, gradNorm=0.0225113700239, residuo=0.00350285521353, funcionalesIguales=1
+Iteracion 119: J=2.78892465735, gradNorm=0.0225230767279, residuo=0.00343010748117, funcionalesIguales=1
+Iteracion 120: J=2.7888193662, gradNorm=0.0225343700672, residuo=0.00342925503856, funcionalesIguales=1
+Iteracion 121: J=2.78872008468, gradNorm=0.022545322973, residuo=0.00342843960475, funcionalesIguales=1
+Iteracion 122: J=2.78862107629, gradNorm=0.0225561122077, residuo=0.00342762237795, funcionalesIguales=1
+Iteracion 123: J=2.78852236483, gradNorm=0.0225667367887, residuo=0.00342680385355, funcionalesIguales=1
+Iteracion 124: J=2.78842397565, gradNorm=0.0225771962186, residuo=0.00342598448548, funcionalesIguales=1
+Iteracion 125: J=2.78832593561, gradNorm=0.0225874904404, residuo=0.0034251646888, funcionalesIguales=1
+Iteracion 126: J=2.78822827285, gradNorm=0.0225976197967, residuo=0.00342434484214, funcionalesIguales=1
+Iteracion 127: J=2.78813101672, gradNorm=0.0226075849894, residuo=0.00342352529014, funcionalesIguales=1
+Iteracion 128: J=2.78803419763, gradNorm=0.0226173870429, residuo=0.00334115303394, funcionalesIguales=1
+Iteracion 129: J=2.78794172009, gradNorm=0.0226269000769, residuo=0.00334076648474, funcionalesIguales=1
+Iteracion 130: J=2.78786626143, gradNorm=0.0226330237775, residuo=0.0033401202105, funcionalesIguales=1
+Iteracion 131: J=2.78779388977, gradNorm=0.0226380817236, residuo=0.00333928826295, funcionalesIguales=1
+Iteracion 132: J=2.78772214481, gradNorm=0.0226430086255, residuo=0.00333839328154, funcionalesIguales=1
+Iteracion 133: J=2.78765106725, gradNorm=0.0226478144176, residuo=0.00333744008343, funcionalesIguales=1
+Iteracion 134: J=2.78758069409, gradNorm=0.0226525084001, residuo=0.00333643324145, funcionalesIguales=1
+Iteracion 135: J=2.78751105874, gradNorm=0.0226570992772, residuo=0.003335377092, funcionalesIguales=1
+Iteracion 136: J=2.78744219114, gradNorm=0.0226615951917, residuo=0.00333427574276, funcionalesIguales=1
+Iteracion 137: J=2.78737411802, gradNorm=0.0226660037566, residuo=0.00333313308034, funcionalesIguales=1
+Iteracion 138: J=2.78730686296, gradNorm=0.0226703320845, residuo=0.00333195277787, funcionalesIguales=1
+Iteracion 139: J=2.78724044667, gradNorm=0.0226745868142, residuo=0.00325156862295, funcionalesIguales=1
+Iteracion 140: J=2.78717800071, gradNorm=0.0226785910968, residuo=0.00325127533506, funcionalesIguales=1
+Iteracion 141: J=2.78712651669, gradNorm=0.0226816318253, residuo=0.00325104875149, funcionalesIguales=1
+Iteracion 142: J=2.78707581755, gradNorm=0.0226846311004, residuo=0.00325081939056, funcionalesIguales=1
+Iteracion 143: J=2.78702591886, gradNorm=0.0226875936404, residuo=0.00325058721211, funcionalesIguales=1
+Iteracion 144: J=2.7869768336, gradNorm=0.0226905238003, residuo=0.00325035218229, funcionalesIguales=1
+Iteracion 145: J=2.78692857241, gradNorm=0.0226934255897, residuo=0.00325011427332, funcionalesIguales=1
+Iteracion 146: J=2.7868811438, gradNorm=0.0226963026887, residuo=0.00324987346345, funcionalesIguales=1
+Iteracion 147: J=2.78683455438, gradNorm=0.022699158464, residuo=0.00324962973685, funcionalesIguales=1
+Iteracion 148: J=2.78678880903, gradNorm=0.0227019959834, residuo=0.00324938308348, funcionalesIguales=1
+Iteracion 149: J=2.78674391113, gradNorm=0.0227048180298, residuo=0.00324913349913, funcionalesIguales=1
+Iteracion 150: J=2.78669986271, gradNorm=0.0227076271144, residuo=0.00324804223154, funcionalesIguales=1
+Iteracion 151: J=2.78665666466, gradNorm=0.0227104254897, residuo=0.00324665682547, funcionalesIguales=1
+Iteracion 152: J=2.78661431681, gradNorm=0.0227132151616, residuo=0.00315325616909, funcionalesIguales=1
+Iteracion 153: J=2.7865728182, gradNorm=0.0227159979013, residuo=0.00315276463019, funcionalesIguales=1
+Iteracion 154: J=2.78653918887, gradNorm=0.0227185086961, residuo=0.00315255564321, funcionalesIguales=1
+Iteracion 155: J=2.78650833577, gradNorm=0.0227209418972, residuo=0.00315235692025, funcionalesIguales=1
+Iteracion 156: J=2.78647825537, gradNorm=0.0227233744044, residuo=0.00315215497762, funcionalesIguales=1
+Iteracion 157: J=2.78644894019, gradNorm=0.0227258071699, residuo=0.00315194980414, funcionalesIguales=2
+Iteracion 158: J=2.78642038306, gradNorm=0.0227282409589, residuo=0.00315174139983, funcionalesIguales=3
+Iteracion 159: J=2.78639257717, gradNorm=0.0227306763606, residuo=0.00315152977525, funcionalesIguales=4
+Iteracion 160: J=2.78636551609, gradNorm=0.0227331137981, residuo=0.00315131495088, funcionalesIguales=5
+Fin de ejecucion. Iteraciones de control completadas: 161
+
+============================================================
+ Resumen final de control optimo
+============================================================
+ Iteracion del funcional minimo
+   - Iteracion: 160
+   - Criterio de parada: 5 funcionales consecutivos iguales
+   - Funcionales consecutivos iguales: 5
+------------------------------------------------------------
+ Controles optimos
+   - C[0]=0; S[0]=0
+   - C[1]=0; S[1]=0
+   - C[2]=0; S[2]=0
+   - C[3]=0; S[3]=0
+   - C[4]=0; S[4]=0
+   - C[5]=0; S[5]=0
+   - C[6]=0; S[6]=0
+   - C[7]=0; S[7]=0
+   - C[8]=0; S[8]=0
+   - C[9]=0; S[9]=0
+   - C[10]=0; S[10]=0
+   - C[11]=0; S[11]=0
+   - C[12]=0; S[12]=0
+   - C[13]=0; S[13]=0
+   - C[14]=0; S[14]=0
+   - C[15]=0; S[15]=0
+   - C[16]=0; S[16]=0
+   - C[17]=0; S[17]=0
+   - C[18]=0; S[18]=0
+   - C[19]=0; S[19]=0
+   - C[20]=0; S[20]=0
+   - C[21]=0; S[21]=0
+   - C[22]=0; S[22]=0
+   - C[23]=0; S[23]=0
+   - C[24]=0; S[24]=0
+   - C[25]=0; S[25]=0
+   - C[26]=0; S[26]=0
+   - C[27]=0; S[27]=0
+   - C[28]=0; S[28]=0
+   - C[29]=0; S[29]=0
+   - C[30]=0; S[30]=0
+   - C[31]=0; S[31]=0
+   - C[32]=0; S[32]=0
+   - C[33]=0; S[33]=0
+   - C[34]=0; S[34]=0
+   - C[35]=0; S[35]=0
+   - C[36]=0; S[36]=0
+   - C[37]=0; S[37]=0
+   - C[38]=0; S[38]=0
+   - C[39]=0; S[39]=0
+   - C[40]=0; S[40]=0
+   - C[41]=0; S[41]=0
+   - C[42]=0; S[42]=0
+   - C[43]=0; S[43]=0
+   - C[44]=0; S[44]=0
+   - C[45]=0; S[45]=0
+   - C[46]=0; S[46]=0
+   - C[47]=0; S[47]=0
+   - C[48]=0; S[48]=0
+   - C[49]=0; S[49]=0
+   - C[50]=0; S[50]=0
+   - C[51]=0; S[51]=0
+   - C[52]=0; S[52]=0
+   - C[53]=0; S[53]=0
+   - C[54]=0; S[54]=0
+   - C[55]=0; S[55]=0
+   - C[56]=0; S[56]=0
+   - C[57]=0; S[57]=0
+   - C[58]=0; S[58]=0
+   - C[59]=0; S[59]=0
+   - C[60]=0; S[60]=0
+   - C[61]=0; S[61]=0
+   - C[62]=0; S[62]=0
+   - C[63]=0; S[63]=0
+   - C[64]=0; S[64]=0
+   - C[65]=0; S[65]=0
+   - C[66]=0; S[66]=0
+   - C[67]=0; S[67]=0
+   - C[68]=0; S[68]=0
+   - C[69]=0; S[69]=0
+   - C[70]=0; S[70]=0
+   - C[71]=0; S[71]=0
+   - C[72]=0; S[72]=0
+   - C[73]=0; S[73]=0
+   - C[74]=0; S[74]=0
+   - C[75]=0; S[75]=0
+   - C[76]=0; S[76]=0
+   - C[77]=0; S[77]=0
+   - C[78]=0; S[78]=0
+   - C[79]=0; S[79]=0
+   - C[80]=0; S[80]=0
+   - C[81]=0; S[81]=0
+   - C[82]=0; S[82]=0
+   - C[83]=0; S[83]=0
+   - C[84]=0; S[84]=0
+   - C[85]=0; S[85]=0
+   - C[86]=0; S[86]=0
+   - C[87]=0; S[87]=0
+   - C[88]=0; S[88]=0
+   - C[89]=0; S[89]=0
+   - C[90]=0; S[90]=0
+   - C[91]=0; S[91]=0
+   - C[92]=0; S[92]=0
+   - C[93]=0; S[93]=0
+   - C[94]=0; S[94]=0
+   - C[95]=0; S[95]=0
+   - C[96]=0; S[96]=0
+   - C[97]=0; S[97]=0
+   - C[98]=0; S[98]=0
+   - C[99]=0; S[99]=0
+   - C[100]=0; S[100]=0
+   - C[101]=0; S[101]=0
+   - C[102]=0; S[102]=0
+   - C[103]=0; S[103]=0
+   - C[104]=0; S[104]=0
+   - C[105]=0; S[105]=0
+   - C[106]=0; S[106]=0
+   - C[107]=0; S[107]=0
+   - C[108]=0; S[108]=0
+   - C[109]=0; S[109]=0
+   - C[110]=0; S[110]=0
+   - C[111]=0; S[111]=0
+   - C[112]=0; S[112]=0
+   - C[113]=0; S[113]=0
+   - C[114]=0; S[114]=0
+   - C[115]=0; S[115]=0
+   - C[116]=0; S[116]=0
+   - C[117]=0; S[117]=0
+   - C[118]=0; S[118]=0
+   - C[119]=0; S[119]=0
+   - C[120]=0; S[120]=0
+   - C[121]=0; S[121]=0
+   - C[122]=0; S[122]=0
+   - C[123]=0; S[123]=0
+   - C[124]=0; S[124]=0
+   - C[125]=0; S[125]=0
+   - C[126]=0; S[126]=0
+   - C[127]=0; S[127]=0
+   - C[128]=0; S[128]=0
+   - C[129]=0; S[129]=0
+   - C[130]=0; S[130]=0
+   - C[131]=0; S[131]=0
+   - C[132]=0; S[132]=0
+   - C[133]=0; S[133]=0
+   - C[134]=0; S[134]=0
+   - C[135]=0; S[135]=0
+   - C[136]=0; S[136]=0
+   - C[137]=0.0183173610095; S[137]=0
+   - C[138]=0.0493999527793; S[138]=0
+   - C[139]=0.0794929082326; S[139]=0
+   - C[140]=0.108582775947; S[140]=0
+   - C[141]=0.136658775129; S[141]=0
+   - C[142]=0.163713743544; S[142]=0
+   - C[143]=0.18975200123; S[143]=0
+   - C[144]=0.214774284463; S[144]=0
+   - C[145]=0.238779953857; S[145]=0
+   - C[146]=0.261770486099; S[146]=0
+   - C[147]=0.283749355856; S[147]=0
+   - C[148]=0.304721906408; S[148]=0
+   - C[149]=0.32469915853; S[149]=0
+   - C[150]=0.343699454735; S[150]=0
+   - C[151]=0.361736315994; S[151]=0
+   - C[152]=0.37882183181; S[152]=0
+   - C[153]=0.394969321798; S[153]=0
+   - C[154]=0.410193212447; S[154]=0
+   - C[155]=0.424511383939; S[155]=0
+   - C[156]=0.437951986616; S[156]=0
+   - C[157]=0.450536066003; S[157]=0
+   - C[158]=0.462281875876; S[158]=0
+   - C[159]=0.473208181644; S[159]=0
+   - C[160]=0.483334150029; S[160]=0
+   - C[161]=0.49268888238; S[161]=0
+   - C[162]=0.501300536687; S[162]=0
+   - C[163]=0.509190972554; S[163]=0
+   - C[164]=0.516380598206; S[164]=0
+   - C[165]=0.52288970115; S[165]=0
+   - C[166]=0.528749874497; S[166]=0
+   - C[167]=0.533989351207; S[167]=0
+   - C[168]=0.538629403936; S[168]=0
+   - C[169]=0.542689628806; S[169]=0
+   - C[170]=0.546194486067; S[170]=0
+   - C[171]=0.549176780392; S[171]=0
+   - C[172]=0.551657140968; S[172]=0
+   - C[173]=0.55365290018; S[173]=0
+   - C[174]=0.555189192921; S[174]=0
+   - C[175]=0.55629470006; S[175]=0
+   - C[176]=0.556985594253; S[176]=0
+   - C[177]=0.55727612579; S[177]=0
+   - C[178]=0.557199798846; S[178]=0
+   - C[179]=0.55676913919; S[179]=0
+   - C[180]=0.555995164361; S[180]=0
+   - C[181]=0.554906779923; S[181]=0
+   - C[182]=0.553509443298; S[182]=0
+   - C[183]=0.551819298398; S[183]=0
+   - C[184]=0.549847537917; S[184]=0
+   - C[185]=0.547598415622; S[185]=0
+   - C[186]=0.54508229199; S[186]=0
+   - C[187]=0.54229656673; S[187]=0
+   - C[188]=0.539239807338; S[188]=0
+   - C[189]=0.535906800968; S[189]=0
+   - C[190]=0.532277835692; S[190]=0
+   - C[191]=0.528333893484; S[191]=0
+   - C[192]=0.524045904302; S[192]=0
+   - C[193]=0.51936806531; S[193]=0
+   - C[194]=0.514239815321; S[194]=0
+   - C[195]=0.508580369303; S[195]=0
+   - C[196]=0.502281581937; S[196]=0
+   - C[197]=0.495198292431; S[197]=0
+   - C[198]=0.487143545209; S[198]=0
+   - C[199]=0.477861780139; S[199]=0
+   - C[200]=0.467008911705; S[200]=0
+   - C[201]=0.454122311374; S[201]=0
+   - C[202]=0.438576664586; S[202]=0
+   - C[203]=0.419510944624; S[203]=0
+   - C[204]=0.395741324516; S[204]=0
+   - C[205]=0.365604622484; S[205]=0
+   - C[206]=0.326738103469; S[206]=0
+   - C[207]=0.275689559549; S[207]=0
+   - C[208]=0.207148936312; S[208]=0
+   - C[209]=0.11176417964; S[209]=0
+   - C[210]=0; S[210]=0
+   - C[211]=0; S[211]=0.382328803313
+   - C[212]=0; S[212]=1
+   - C[213]=0; S[213]=1
+   - C[214]=0; S[214]=1
+   - C[215]=0; S[215]=1
+   - C[216]=0; S[216]=1
+   - C[217]=0; S[217]=1
+   - C[218]=0; S[218]=1
+   - C[219]=0; S[219]=1
+   - C[220]=0; S[220]=1
+   - C[221]=0; S[221]=1
+   - C[222]=0; S[222]=1
+   - C[223]=0; S[223]=1
+   - C[224]=0; S[224]=1
+   - C[225]=0; S[225]=1
+   - C[226]=0; S[226]=1
+   - C[227]=0; S[227]=1
+   - C[228]=0; S[228]=1
+   - C[229]=0; S[229]=1
+   - C[230]=0; S[230]=1
+   - C[231]=0; S[231]=1
+   - C[232]=0; S[232]=1
+   - C[233]=0; S[233]=1
+   - C[234]=0; S[234]=1
+   - C[235]=0; S[235]=1
+   - C[236]=0; S[236]=1
+   - C[237]=0; S[237]=1
+   - C[238]=0; S[238]=0.267636087294
+   - C[239]=0; S[239]=0
+   - C[240]=0; S[240]=0
+   - C[241]=0; S[241]=0
+   - C[242]=0; S[242]=0
+   - C[243]=0; S[243]=0
+   - C[244]=0; S[244]=0
+   - C[245]=0; S[245]=0
+   - C[246]=0; S[246]=0
+   - C[247]=0; S[247]=0
+   - C[248]=0; S[248]=0
+   - C[249]=0; S[249]=0
+   - C[250]=0; S[250]=0
+------------------------------------------------------------
+ Estados optimos
+   - Iteracion: 0, t=0: Volumen=0.0385345778918, Min u=2.74058669466e-09, Max u=0.599791979493, Min sigma=0.575816355762, Max sigma=1, Integral u^2=0.0116614594929, Integral (sigma-sigmaQ)^2=0.0835513493508
+   - Iteracion: 1, t=0.008: Volumen=0.0396038708143, Min u=0.00203126801272, Max u=0.256873315648, Min sigma=0.580167553815, Max sigma=1.00024477439, Integral u^2=0.0042431116221, Integral (sigma-sigmaQ)^2=0.0830232602807
+   - Iteracion: 2, t=0.016: Volumen=0.0407200043236, Min u=0.00554130647436, Max u=0.20698135136, Min sigma=0.583992396924, Max sigma=1.00050126686, Integral u^2=0.00317802674447, Integral (sigma-sigmaQ)^2=0.082590182925
+   - Iteracion: 3, t=0.024: Volumen=0.0418715116148, Min u=0.00954900760986, Max u=0.187258249089, Min sigma=0.587602302694, Max sigma=1.00073191818, Integral u^2=0.00292957023235, Integral (sigma-sigmaQ)^2=0.0822019448081
+   - Iteracion: 4, t=0.032: Volumen=0.0430568851107, Min u=0.0130894469086, Max u=0.178821834599, Min sigma=0.591065215079, Max sigma=1.00088319037, Integral u^2=0.00289467016149, Integral (sigma-sigmaQ)^2=0.0818412786995
+   - Iteracion: 5, t=0.04: Volumen=0.0442762673937, Min u=0.0160508048686, Max u=0.176312026356, Min sigma=0.594411947382, Max sigma=1.00089511731, Integral u^2=0.00294018170685, Integral (sigma-sigmaQ)^2=0.0814996402124
+   - Iteracion: 6, t=0.048: Volumen=0.0455302735635, Min u=0.0187019309242, Max u=0.177224954972, Min sigma=0.597659551262, Max sigma=1.00071695561, Integral u^2=0.00302428334393, Integral (sigma-sigmaQ)^2=0.0811720985833
+   - Iteracion: 7, t=0.056: Volumen=0.0468197005689, Min u=0.021127294324, Max u=0.18014711917, Min sigma=0.600800539521, Max sigma=1.00031830705, Integral u^2=0.00313146707946, Integral (sigma-sigmaQ)^2=0.0808555100648
+   - Iteracion: 8, t=0.064: Volumen=0.048145433842, Min u=0.0233792135798, Max u=0.184084632468, Min sigma=0.603690892544, Max sigma=0.999684111275, Integral u^2=0.003255272454, Integral (sigma-sigmaQ)^2=0.0805477148448
+   - Iteracion: 9, t=0.072: Volumen=0.0495084135225, Min u=0.0255302333516, Max u=0.188386198986, Min sigma=0.606509760784, Max sigma=0.998829875792, Integral u^2=0.00339271826989, Integral (sigma-sigmaQ)^2=0.0802471415799
+   - Iteracion: 10, t=0.08: Volumen=0.0509096210567, Min u=0.0272931333989, Max u=0.192752715965, Min sigma=0.609262012092, Max sigma=0.997751569498, Integral u^2=0.00354233225634, Integral (sigma-sigmaQ)^2=0.0799525958192
+   - Iteracion: 11, t=0.088: Volumen=0.0523500733233, Min u=0.0288238399692, Max u=0.197023150026, Min sigma=0.61195176795, Max sigma=0.996463429972, Integral u^2=0.00370339507875, Integral (sigma-sigmaQ)^2=0.0796631384722
+   - Iteracion: 12, t=0.096: Volumen=0.0538308198018, Min u=0.0304009854404, Max u=0.201240210773, Min sigma=0.614574195025, Max sigma=0.994985764364, Integral u^2=0.00387561882399, Integral (sigma-sigmaQ)^2=0.0793780114223
+   - Iteracion: 13, t=0.104: Volumen=0.0553529411305, Min u=0.0318096293107, Max u=0.205327562777, Min sigma=0.617080490779, Max sigma=0.993341259033, Integral u^2=0.00405899189804, Integral (sigma-sigmaQ)^2=0.0790965893861
+   - Iteracion: 14, t=0.112: Volumen=0.0569175483928, Min u=0.0327896782937, Max u=0.209293760189, Min sigma=0.619528372173, Max sigma=0.991553291156, Integral u^2=0.00425369415419, Integral (sigma-sigmaQ)^2=0.0788183472506
+   - Iteracion: 15, t=0.12: Volumen=0.0585257828348, Min u=0.0338322984445, Max u=0.213151961012, Min sigma=0.621799641456, Max sigma=0.98964476244, Integral u^2=0.0044600456371, Integral (sigma-sigmaQ)^2=0.0785428370438
+   - Iteracion: 16, t=0.128: Volumen=0.0601788158607, Min u=0.0349333458547, Max u=0.216918185335, Min sigma=0.6240273758, Max sigma=0.987637353035, Integral u^2=0.0046784736999, Integral (sigma-sigmaQ)^2=0.0782696711899
+   - Iteracion: 17, t=0.136: Volumen=0.061877849217, Min u=0.0360802526119, Max u=0.220609903051, Min sigma=0.626213447304, Max sigma=0.985551090847, Integral u^2=0.00490949132716, Integral (sigma-sigmaQ)^2=0.0779985100388
+   - Iteracion: 18, t=0.144: Volumen=0.0636241153073, Min u=0.0372880808468, Max u=0.224244997077, Min sigma=0.628334064425, Max sigma=0.983404145261, Integral u^2=0.00515368280869, Integral (sigma-sigmaQ)^2=0.0777290524001
+   - Iteracion: 19, t=0.152: Volumen=0.0654188775992, Min u=0.0385294510848, Max u=0.227841056212, Min sigma=0.630351142879, Max sigma=0.981212773119, Integral u^2=0.00541169443766, Integral (sigma-sigmaQ)^2=0.0774610282471
+   - Iteracion: 20, t=0.16: Volumen=0.0672634310964, Min u=0.0398294804289, Max u=0.23141492738, Min sigma=0.632320542657, Max sigma=0.978991362878, Integral u^2=0.00568422871571, Integral (sigma-sigmaQ)^2=0.077194193023
+   - Iteracion: 21, t=0.168: Volumen=0.0691591028553, Min u=0.0411644552465, Max u=0.234982459367, Min sigma=0.634171834005, Max sigma=0.976752538114, Integral u^2=0.00597204103199, Integral (sigma-sigmaQ)^2=0.0769283231494
+   - Iteracion: 22, t=0.176: Volumen=0.0711072525352, Min u=0.0425486658822, Max u=0.238558381386, Min sigma=0.635969204812, Max sigma=0.974507293423, Integral u^2=0.00627593809964, Integral (sigma-sigmaQ)^2=0.0766632124507
+   - Iteracion: 23, t=0.184: Volumen=0.073109272969, Min u=0.0439726735685, Max u=0.242156272644, Min sigma=0.637695347394, Max sigma=0.972265144589, Integral u^2=0.00659677764952, Integral (sigma-sigmaQ)^2=0.0763986692824
+   - Iteracion: 24, t=0.192: Volumen=0.0751665907504, Min u=0.0454382597666, Max u=0.245788590515, Min sigma=0.639340549109, Max sigma=0.970034281278, Integral u^2=0.00693546903246, Integral (sigma-sigmaQ)^2=0.0761345142072
+   - Iteracion: 25, t=0.2: Volumen=0.0772806668306, Min u=0.0469455742962, Max u=0.249466734228, Min sigma=0.640938268765, Max sigma=0.967821714955, Integral u^2=0.007292974488, Integral (sigma-sigmaQ)^2=0.0758705781003
+   - Iteracion: 26, t=0.208: Volumen=0.0794529971208, Min u=0.0484951206583, Max u=0.253201128057, Min sigma=0.642483253549, Max sigma=0.9656334178, Integral u^2=0.00767031091299, Integral (sigma-sigmaQ)^2=0.0756067005928
+   - Iteracion: 27, t=0.216: Volumen=0.0816851130984, Min u=0.0500913564597, Max u=0.257001313246, Min sigma=0.643979350775, Max sigma=0.963474450433, Integral u^2=0.00806855201617, Integral (sigma-sigmaQ)^2=0.075342728784
+   - Iteracion: 28, t=0.224: Volumen=0.083978582414, Min u=0.0517347586422, Max u=0.260876041666, Min sigma=0.645453711859, Max sigma=0.961349077589, Integral u^2=0.00848883078198, Integral (sigma-sigmaQ)^2=0.0750785161689
+   - Iteracion: 29, t=0.232: Volumen=0.0863350094966, Min u=0.0534309944501, Max u=0.264833366821, Min sigma=0.646879628673, Max sigma=0.959260871747, Integral u^2=0.00893234219268, Integral (sigma-sigmaQ)^2=0.0748139217389
+   - Iteracion: 30, t=0.24: Volumen=0.0887560361566, Min u=0.0551748034411, Max u=0.268880729653, Min sigma=0.648266183582, Max sigma=0.957212805215, Integral u^2=0.00940034617586, Integral (sigma-sigmaQ)^2=0.0745488092222
+   - Iteracion: 31, t=0.248: Volumen=0.0912433421835, Min u=0.056969294142, Max u=0.273025037796, Min sigma=0.649627418368, Max sigma=0.955207331446, Integral u^2=0.00989417075695, Integral (sigma-sigmaQ)^2=0.074283046438
+   - Iteracion: 32, t=0.256: Volumen=0.0937986459374, Min u=0.0588172406519, Max u=0.277272737752, Min sigma=0.650965577931, Max sigma=0.953246456529, Integral u^2=0.0104152154048, Integral (sigma-sigmaQ)^2=0.0740165047446
+   - Iteracion: 33, t=0.264: Volumen=0.0964237049337, Min u=0.0607201170249, Max u=0.281629879938, Min sigma=0.652265905897, Max sigma=0.951331801805, Integral u^2=0.0109649545645, Integral (sigma-sigmaQ)^2=0.0737490585643
+   - Iteracion: 34, t=0.272: Volumen=0.0991203164176, Min u=0.062679762169, Max u=0.286102176907, Min sigma=0.653548858422, Max sigma=0.949464658566, Integral u^2=0.0115449413758, Integral (sigma-sigmaQ)^2=0.0734805849718
+   - Iteracion: 35, t=0.28: Volumen=0.101890317928, Min u=0.0646937733323, Max u=0.290695055165, Min sigma=0.654800956372, Max sigma=0.947646035742, Integral u^2=0.0121568115777, Integral (sigma-sigmaQ)^2=0.0732109633363
+   - Iteracion: 36, t=0.288: Volumen=0.104735587847, Min u=0.0667668616309, Max u=0.295413701147, Min sigma=0.656035056541, Max sigma=0.945876701408, Integral u^2=0.0128022876033, Integral (sigma-sigmaQ)^2=0.0729400750086
+   - Iteracion: 37, t=0.296: Volumen=0.107658045942, Min u=0.0689001343063, Max u=0.300263101902, Min sigma=0.657252516017, Max sigma=0.944157218863, Integral u^2=0.0134831828675, Integral (sigma-sigmaQ)^2=0.0726678030453
+   - Iteracion: 38, t=0.304: Volumen=0.110659653881, Min u=0.0710948765218, Max u=0.305248081054, Min sigma=0.658449099857, Max sigma=0.942487977966, Integral u^2=0.0142014062555, Integral (sigma-sigmaQ)^2=0.0723940319664
+   - Iteracion: 39, t=0.312: Volumen=0.113742415738, Min u=0.0733544290486, Max u=0.310373330567, Min sigma=0.659633571574, Max sigma=0.940869222333, Integral u^2=0.0149589668149, Integral (sigma-sigmaQ)^2=0.0721186475398
+   - Iteracion: 40, t=0.32: Volumen=0.116908378475, Min u=0.0756799163292, Max u=0.315643438803, Min sigma=0.660805638508, Max sigma=0.939301072929, Integral u^2=0.0157579786605, Integral (sigma-sigmaQ)^2=0.0718415365903
+   - Iteracion: 41, t=0.328: Volumen=0.120159632404, Min u=0.0780727700849, Max u=0.32106291533, Min sigma=0.661966857874, Max sigma=0.937783548511, Integral u^2=0.0166006660972, Integral (sigma-sigmaQ)^2=0.0715625868295
+   - Iteracion: 42, t=0.336: Volumen=0.123498311623, Min u=0.0805341274109, Max u=0.326636212866, Min sigma=0.663115015659, Max sigma=0.936316583364, Integral u^2=0.017489368968, Integral (sigma-sigmaQ)^2=0.071281686704
+   - Iteracion: 43, t=0.344: Volumen=0.126926594422, Min u=0.0830689825428, Max u=0.332367746729, Min sigma=0.66425952928, Max sigma=0.934904830162, Integral u^2=0.0184265482347, Integral (sigma-sigmaQ)^2=0.0709987252602
+   - Iteracion: 44, t=0.352: Volumen=0.130446703669, Min u=0.0856749446488, Max u=0.338261912104, Min sigma=0.665391518388, Max sigma=0.933542744806, Integral u^2=0.0194147917979, Integral (sigma-sigmaQ)^2=0.0707135920235
+   - Iteracion: 45, t=0.36: Volumen=0.134060907152, Min u=0.0883540077903, Max u=0.344323099405, Min sigma=0.666513144495, Max sigma=0.932230075428, Integral u^2=0.0204568205633, Integral (sigma-sigmaQ)^2=0.0704261768906
+   - Iteracion: 46, t=0.368: Volumen=0.137771517898, Min u=0.0911122307663, Max u=0.350555707969, Min sigma=0.667633266787, Max sigma=0.930966555717, Integral u^2=0.0215554947629, Integral (sigma-sigmaQ)^2=0.0701363700343
+   - Iteracion: 47, t=0.376: Volumen=0.141580894445, Min u=0.0939473723796, Max u=0.356964158311, Min sigma=0.66874493188, Max sigma=0.929751896203, Integral u^2=0.022713820536, Integral (sigma-sigmaQ)^2=0.0698440618188
+   - Iteracion: 48, t=0.384: Volumen=0.145491441084, Min u=0.0968650718021, Max u=0.3635529031, Min sigma=0.669855128407, Max sigma=0.928585791294, Integral u^2=0.0239349567783, Integral (sigma-sigmaQ)^2=0.0695491427252
+   - Iteracion: 49, t=0.392: Volumen=0.149505608042, Min u=0.0998632092075, Max u=0.37033164124, Min sigma=0.670956670343, Max sigma=0.927467925344, Integral u^2=0.0252222222669, Integral (sigma-sigmaQ)^2=0.0692515032872
+   - Iteracion: 50, t=0.4: Volumen=0.153625891637, Min u=0.10294419315, Max u=0.377300700212, Min sigma=0.672052756185, Max sigma=0.926397977888, Integral u^2=0.0265791030646, Integral (sigma-sigmaQ)^2=0.0689510340349
+   - Iteracion: 51, t=0.408: Volumen=0.157854834368, Min u=0.106111539267, Max u=0.384462793134, Min sigma=0.673144461859, Max sigma=0.925375628153, Integral u^2=0.0280092602147, Integral (sigma-sigmaQ)^2=0.0686476254476
+   - Iteracion: 52, t=0.416: Volumen=0.162195024959, Min u=0.109366432165, Max u=0.391822565332, Min sigma=0.674232343389, Max sigma=0.924400558947, Integral u^2=0.0295165377272, Integral (sigma-sigmaQ)^2=0.0683411679149
+   - Iteracion: 53, t=0.424: Volumen=0.166649098341, Min u=0.112711845634, Max u=0.399384735979, Min sigma=0.67531964735, Max sigma=0.923472460003, Integral u^2=0.0311049708674, Integral (sigma-sigmaQ)^2=0.0680315517051
+   - Iteracion: 54, t=0.432: Volumen=0.17121973558, Min u=0.116149774267, Max u=0.40716397113, Min sigma=0.676404453774, Max sigma=0.92259430364, Integral u^2=0.0327787947478, Integral (sigma-sigmaQ)^2=0.0677186669418
+   - Iteracion: 55, t=0.44: Volumen=0.175909663729, Min u=0.119683860735, Max u=0.415159824458, Min sigma=0.677492200667, Max sigma=0.921766305852, Integral u^2=0.0345424532321, Integral (sigma-sigmaQ)^2=0.0674024035878
+   - Iteracion: 56, t=0.448: Volumen=0.180721655619, Min u=0.1233157608, Max u=0.423372562471, Min sigma=0.678579445983, Max sigma=0.920984044665, Integral u^2=0.0364006081526, Integral (sigma-sigmaQ)^2=0.0670826514361
+   - Iteracion: 57, t=0.456: Volumen=0.185658529578, Min u=0.127047609844, Max u=0.431807251086, Min sigma=0.679669564117, Max sigma=0.920247273678, Integral u^2=0.038358148848, Integral (sigma-sigmaQ)^2=0.0667593001089
+   - Iteracion: 58, t=0.464: Volumen=0.190723149061, Min u=0.13088286763, Max u=0.440469056241, Min sigma=0.680761875048, Max sigma=0.91955576447, Integral u^2=0.0404202020217, Integral (sigma-sigmaQ)^2=0.0664322390628
+   - Iteracion: 59, t=0.472: Volumen=0.195918422208, Min u=0.134821866994, Max u=0.449363247783, Min sigma=0.681855849672, Max sigma=0.91890930781, Integral u^2=0.0425921419261, Integral (sigma-sigmaQ)^2=0.0661013576022
+   - Iteracion: 60, t=0.48: Volumen=0.201247301312, Min u=0.138868473629, Max u=0.458495203139, Min sigma=0.68295299895, Max sigma=0.918307714688, Integral u^2=0.0448796008725, Integral (sigma-sigmaQ)^2=0.0657665448997
+   - Iteracion: 61, t=0.488: Volumen=0.206712782192, Min u=0.143023701423, Max u=0.467870410769, Min sigma=0.684050440607, Max sigma=0.91775081718, Integral u^2=0.0472884800682, Integral (sigma-sigmaQ)^2=0.0654276900236
+   - Iteracion: 62, t=0.496: Volumen=0.21231790347, Min u=0.147289796994, Max u=0.47749447345, Min sigma=0.6851482512, Max sigma=0.917238469188, Integral u^2=0.0498249607805, Integral (sigma-sigmaQ)^2=0.065084681973
+   - Iteracion: 63, t=0.504: Volumen=0.218065745748, Min u=0.151666988428, Max u=0.487373111389, Min sigma=0.68624953607, Max sigma=0.916770547048, Integral u^2=0.0524955158267, Integral (sigma-sigmaQ)^2=0.064737409721
+   - Iteracion: 64, t=0.512: Volumen=0.223959430675, Min u=0.156161137422, Max u=0.497512165198, Min sigma=0.68735244221, Max sigma=0.916346950049, Integral u^2=0.0553069213865, Integral (sigma-sigmaQ)^2=0.0643857622645
+   - Iteracion: 65, t=0.52: Volumen=0.230002119901, Min u=0.160772324368, Max u=0.507917598742, Min sigma=0.688453397269, Max sigma=0.915967600858, Integral u^2=0.0582662691333, Integral (sigma-sigmaQ)^2=0.064029628683
+   - Iteracion: 66, t=0.528: Volumen=0.23619701391, Min u=0.165499733883, Max u=0.518595501875, Min sigma=0.689560388873, Max sigma=0.915632445873, Integral u^2=0.0613809786804, Integral (sigma-sigmaQ)^2=0.0636688982047
+   - Iteracion: 67, t=0.536: Volumen=0.242547350739, Min u=0.170351487098, Max u=0.529552093068, Min sigma=0.690667862414, Max sigma=0.915341455512, Integral u^2=0.0646588103321, Integral (sigma-sigmaQ)^2=0.0633034602812
+   - Iteracion: 68, t=0.544: Volumen=0.249056404552, Min u=0.175326541743, Max u=0.54079372196, Min sigma=0.691776235465, Max sigma=0.915095640333, Integral u^2=0.0681078781348, Integral (sigma-sigmaQ)^2=0.0629332046705
+   - Iteracion: 69, t=0.552: Volumen=0.255727484088, Min u=0.180426873055, Max u=0.552553430301, Min sigma=0.692890807767, Max sigma=0.915029366718, Integral u^2=0.071736663214, Integral (sigma-sigmaQ)^2=0.0625580215285
+   - Iteracion: 70, t=0.56: Volumen=0.262563930967, Min u=0.185656167222, Max u=0.564789897338, Min sigma=0.694009487384, Max sigma=0.914998259475, Integral u^2=0.0755540273878, Integral (sigma-sigmaQ)^2=0.06217780151
+   - Iteracion: 71, t=0.568: Volumen=0.269569117843, Min u=0.191019551005, Max u=0.577322891868, Min sigma=0.695131559396, Max sigma=0.915002791153, Integral u^2=0.0795692270395, Integral (sigma-sigmaQ)^2=0.0617924358783
+   - Iteracion: 72, t=0.576: Volumen=0.276746446409, Min u=0.19651421217, Max u=0.590159466662, Min sigma=0.696261748327, Max sigma=0.915043442183, Integral u^2=0.0837919272349, Integral (sigma-sigmaQ)^2=0.0614018166245
+   - Iteracion: 73, t=0.584: Volumen=0.284099345235, Min u=0.202146511679, Max u=0.603306808129, Min sigma=0.697397497535, Max sigma=0.91512070154, Integral u^2=0.0882322160635, Integral (sigma-sigmaQ)^2=0.0610058365962
+   - Iteracion: 74, t=0.592: Volumen=0.291631267448, Min u=0.207920313687, Max u=0.61677223851, Min sigma=0.698536616428, Max sigma=0.915235067365, Integral u^2=0.0929006191815, Integral (sigma-sigmaQ)^2=0.0606043896367
+   - Iteracion: 75, t=0.6: Volumen=0.299345688232, Min u=0.21383567308, Max u=0.630563218049, Min sigma=0.699680064391, Max sigma=0.915387047569, Integral u^2=0.0978081145335, Integral (sigma-sigmaQ)^2=0.0601973707345
+   - Iteracion: 76, t=0.608: Volumen=0.307246102156, Min u=0.219892144716, Max u=0.644691499313, Min sigma=0.700830636763, Max sigma=0.915578343818, Integral u^2=0.102966147224, Integral (sigma-sigmaQ)^2=0.0597846761822
+   - Iteracion: 77, t=0.616: Volumen=0.315336020312, Min u=0.226094583427, Max u=0.659161764673, Min sigma=0.701991165686, Max sigma=0.9158084659, Integral u^2=0.108386644507, Integral (sigma-sigmaQ)^2=0.0593662037485
+   - Iteracion: 78, t=0.624: Volumen=0.323618967268, Min u=0.232443889852, Max u=0.67398073705, Min sigma=0.703156337171, Max sigma=0.916077703093, Integral u^2=0.114082030867, Integral (sigma-sigmaQ)^2=0.058941852859
+   - Iteracion: 79, t=0.632: Volumen=0.332098477815, Min u=0.238946833094, Max u=0.689156452096, Min sigma=0.704330387628, Max sigma=0.916386611747, Integral u^2=0.120065243141, Integral (sigma-sigmaQ)^2=0.0585115247903
+   - Iteracion: 80, t=0.64: Volumen=0.340778093524, Min u=0.245605590273, Max u=0.704697093892, Min sigma=0.705515515668, Max sigma=0.916735760463, Integral u^2=0.126349745655, Integral (sigma-sigmaQ)^2=0.0580751228752
+   - Iteracion: 81, t=0.648: Volumen=0.349661359085, Min u=0.252415164912, Max u=0.72061099701, Min sigma=0.706708851522, Max sigma=0.917125730571, Integral u^2=0.132949545325, Integral (sigma-sigmaQ)^2=0.0576325527201
+   - Iteracion: 82, t=0.656: Volumen=0.358751818437, Min u=0.259385459323, Max u=0.736906648584, Min sigma=0.707911286384, Max sigma=0.917557116591, Integral u^2=0.139879206669, Integral (sigma-sigmaQ)^2=0.0571837224349
+   - Iteracion: 83, t=0.664: Volumen=0.368053010675, Min u=0.266518849389, Max u=0.753592690372, Min sigma=0.709119625069, Max sigma=0.918030526678, Integral u^2=0.147153866689, Integral (sigma-sigmaQ)^2=0.0567285428758
+   - Iteracion: 84, t=0.672: Volumen=0.377568465736, Min u=0.273815945323, Max u=0.770677920845, Min sigma=0.710340346427, Max sigma=0.918546583055, Integral u^2=0.154789249563, Integral (sigma-sigmaQ)^2=0.0562669279013
+   - Iteracion: 85, t=0.68: Volumen=0.387301699858, Min u=0.281275552847, Max u=0.788171297288, Min sigma=0.711574111094, Max sigma=0.919105922428, Integral u^2=0.162801681077, Integral (sigma-sigmaQ)^2=0.0557987946411
+   - Iteracion: 86, t=0.688: Volumen=0.397256210796, Min u=0.288902110775, Max u=0.806081937933, Min sigma=0.712816204083, Max sigma=0.919709196391, Integral u^2=0.171208102757, Integral (sigma-sigmaQ)^2=0.0553240637794
+   - Iteracion: 87, t=0.696: Volumen=0.407435472808, Min u=0.296695336435, Max u=0.824419124135, Min sigma=0.714071329906, Max sigma=0.920357071815, Integral u^2=0.180026085605, Integral (sigma-sigmaQ)^2=0.0548426598515
+   - Iteracion: 88, t=0.704: Volumen=0.417842931401, Min u=0.304662370436, Max u=0.843192302594, Min sigma=0.715336883647, Max sigma=0.921050231231, Integral u^2=0.189273843389, Integral (sigma-sigmaQ)^2=0.0543545115554
+   - Iteracion: 89, t=0.712: Volumen=0.428481997821, Min u=0.312805256402, Max u=0.862411087645, Min sigma=0.716614815823, Max sigma=0.921789373199, Integral u^2=0.198970245397, Integral (sigma-sigmaQ)^2=0.0538595520771
+   - Iteracion: 90, t=0.72: Volumen=0.439356043307, Min u=0.321121498796, Max u=0.882085263617, Min sigma=0.717904701559, Max sigma=0.922575212665, Integral u^2=0.209134828578, Integral (sigma-sigmaQ)^2=0.0533577194312
+   - Iteracion: 91, t=0.728: Volumen=0.450468393085, Min u=0.329614106236, Max u=0.90222478729, Min sigma=0.719207854167, Max sigma=0.923408481314, Integral u^2=0.219787808991, Integral (sigma-sigmaQ)^2=0.0528489568166
+   - Iteracion: 92, t=0.736: Volumen=0.461822320116, Min u=0.338287981199, Max u=0.922839790448, Min sigma=0.720523370095, Max sigma=0.92428992791, Integral u^2=0.230950092465, Integral (sigma-sigmaQ)^2=0.0523332129868
+   - Iteracion: 93, t=0.744: Volumen=0.473421038586, Min u=0.347138197254, Max u=0.943940582568, Min sigma=0.721853077864, Max sigma=0.92522031863, Integral u^2=0.242643284375, Integral (sigma-sigmaQ)^2=0.0518104426362
+   - Iteracion: 94, t=0.752: Volumen=0.485267697141, Min u=0.35617102042, Max u=0.965537653636, Min sigma=0.723199620631, Max sigma=0.926200437387, Integral u^2=0.254889698455, Integral (sigma-sigmaQ)^2=0.0512806068014
+   - Iteracion: 95, t=0.76: Volumen=0.497365371873, Min u=0.365388173218, Max u=0.987641677136, Min sigma=0.724557934753, Max sigma=0.927241778105, Integral u^2=0.26771236452, Integral (sigma-sigmaQ)^2=0.0507436732788
+   - Iteracion: 96, t=0.768: Volumen=0.509717059047, Min u=0.374786111548, Max u=1.01026351322, Min sigma=0.725933379699, Max sigma=0.928471660958, Integral u^2=0.281135035019, Integral (sigma-sigmaQ)^2=0.0501996170569
+   - Iteracion: 97, t=0.776: Volumen=0.522325667578, Min u=0.384372163036, Max u=1.03341421208, Min sigma=0.727326945653, Max sigma=0.929756939873, Integral u^2=0.295182190299, Integral (sigma-sigmaQ)^2=0.0496484207656
+   - Iteracion: 98, t=0.784: Volumen=0.535194011255, Min u=0.394142023504, Max u=1.05710501755, Min sigma=0.72873544261, Max sigma=0.931098372511, Integral u^2=0.309879042472, Integral (sigma-sigmaQ)^2=0.0490900751404
+   - Iteracion: 99, t=0.792: Volumen=0.548324800728, Min u=0.404098591834, Max u=1.08134737102, Min sigma=0.730161642272, Max sigma=0.932498630546, Integral u^2=0.325251537778, Integral (sigma-sigmaQ)^2=0.048524579503
+   - Iteracion: 100, t=0.8: Volumen=0.56172063524, Min u=0.414245796353, Max u=1.10615291553, Min sigma=0.731603117624, Max sigma=0.933959696893, Integral u^2=0.341326357328, Integral (sigma-sigmaQ)^2=0.0479519422571
+   - Iteracion: 101, t=0.808: Volumen=0.575383994131, Min u=0.424584233056, Max u=1.13153350031, Min sigma=0.733063873036, Max sigma=0.93547951978, Integral u^2=0.358130916111, Integral (sigma-sigmaQ)^2=0.0473721814001
+   - Iteracion: 102, t=0.816: Volumen=0.589317228109, Min u=0.43510507353, Max u=1.1575011856, Min sigma=0.73454491581, Max sigma=0.937059331886, Integral u^2=0.375693360158, Integral (sigma-sigmaQ)^2=0.0467853250506
+   - Iteracion: 103, t=0.824: Volumen=0.603522550292, Min u=0.445817354896, Max u=1.18472829628, Min sigma=0.736043690162, Max sigma=0.938703448699, Integral u^2=0.394042561738, Integral (sigma-sigmaQ)^2=0.0461914119901
+   - Iteracion: 104, t=0.832: Volumen=0.618002027043, Min u=0.456721298291, Max u=1.2127633083, Min sigma=0.737560941177, Max sigma=0.940409203761, Integral u^2=0.413208112483, Integral (sigma-sigmaQ)^2=0.045590492221
+   - Iteracion: 105, t=0.84: Volumen=0.632757568587, Min u=0.467816725914, Max u=1.24148457565, Min sigma=0.739099779534, Max sigma=0.942177622794, Integral u^2=0.433220314324, Integral (sigma-sigmaQ)^2=0.0449826275383
+   - Iteracion: 106, t=0.848: Volumen=0.647790919444, Min u=0.479098947625, Max u=1.27089872816, Min sigma=0.740658875898, Max sigma=0.94401039639, Integral u^2=0.454110168131, Integral (sigma-sigmaQ)^2=0.0443678921159
+   - Iteracion: 107, t=0.856: Volumen=0.663103648665, Min u=0.490567783879, Max u=1.30102138548, Min sigma=0.742237047108, Max sigma=0.945911496489, Integral u^2=0.475909359957, Integral (sigma-sigmaQ)^2=0.0437463731067
+   - Iteracion: 108, t=0.864: Volumen=0.678697139902, Min u=0.502226015366, Max u=1.33189119342, Min sigma=0.743838086329, Max sigma=0.947878521149, Integral u^2=0.498650244776, Integral (sigma-sigmaQ)^2=0.0431181712558
+   - Iteracion: 109, t=0.872: Volumen=0.694572581315, Min u=0.514066393667, Max u=1.36350310916, Min sigma=0.745460049247, Max sigma=0.949912623803, Integral u^2=0.522365827638, Integral (sigma-sigmaQ)^2=0.0424834015269
+   - Iteracion: 110, t=0.88: Volumen=0.710730955336, Min u=0.52609167243, Max u=1.39587389046, Min sigma=0.74710251812, Max sigma=0.952016587359, Integral u^2=0.547089742134, Integral (sigma-sigmaQ)^2=0.04184219374
+   - Iteracion: 111, t=0.888: Volumen=0.7271730283, Min u=0.538302001677, Max u=1.42902090459, Min sigma=0.748769113832, Max sigma=0.954191787291, Integral u^2=0.572856226113, Integral (sigma-sigmaQ)^2=0.0411946932212
+   - Iteracion: 112, t=0.896: Volumen=0.743899339966, Min u=0.550695436548, Max u=1.46297759311, Min sigma=0.750459105203, Max sigma=0.956437724738, Integral u^2=0.599700094575, Integral (sigma-sigmaQ)^2=0.0405410614626
+   - Iteracion: 113, t=0.904: Volumen=0.760910192936, Min u=0.563269733969, Max u=1.49775820703, Min sigma=0.752170430077, Max sigma=0.958755687603, Integral u^2=0.627656709684, Integral (sigma-sigmaQ)^2=0.0398814767917
+   - Iteracion: 114, t=0.912: Volumen=0.778205642006, Min u=0.576016813359, Max u=1.53337139464, Min sigma=0.75390547445, Max sigma=0.961146998135, Integral u^2=0.656761947861, Integral (sigma-sigmaQ)^2=0.0392161350499
+   - Iteracion: 115, t=0.92: Volumen=0.795785483442, Min u=0.588934903387, Max u=1.56983667156, Min sigma=0.755662744042, Max sigma=0.963613013561, Integral u^2=0.687052163936, Integral (sigma-sigmaQ)^2=0.0385452502785
+   - Iteracion: 116, t=0.928: Volumen=0.813649244233, Min u=0.60202504086, Max u=1.60718456818, Min sigma=0.75744614013, Max sigma=0.966156198097, Integral u^2=0.718564152335, Integral (sigma-sigmaQ)^2=0.0378690554108
+   - Iteracion: 117, t=0.936: Volumen=0.831796171313, Min u=0.615283679306, Max u=1.64543882268, Min sigma=0.759256023179, Max sigma=0.968779020192, Integral u^2=0.751335105319, Integral (sigma-sigmaQ)^2=0.0371878029706
+   - Iteracion: 118, t=0.944: Volumen=0.850225220784, Min u=0.628706916385, Max u=1.68460859902, Min sigma=0.761089948114, Max sigma=0.971480847869, Integral u^2=0.785402568311, Integral (sigma-sigmaQ)^2=0.0365017657736
+   - Iteracion: 119, t=0.952: Volumen=0.868935047172, Min u=0.642290009709, Max u=1.72471609418, Min sigma=0.762949764937, Max sigma=0.974263188468, Integral u^2=0.820804392337, Integral (sigma-sigmaQ)^2=0.0358112376326
+   - Iteracion: 120, t=0.96: Volumen=0.887923992711, Min u=0.656020331295, Max u=1.76578426612, Min sigma=0.76483713445, Max sigma=0.977127588337, Integral u^2=0.857578683684, Integral (sigma-sigmaQ)^2=0.0351165340631
+   - Iteracion: 121, t=0.968: Volumen=0.9071900767, Min u=0.669901186791, Max u=1.807836882, Min sigma=0.766748780665, Max sigma=0.98007660383, Integral u^2=0.895763750848, Integral (sigma-sigmaQ)^2=0.0344179929897
+   - Iteracion: 122, t=0.976: Volumen=0.926730984942, Min u=0.68392714771, Max u=1.85089857014, Min sigma=0.768687378285, Max sigma=0.983113197855, Integral u^2=0.935398048918, Integral (sigma-sigmaQ)^2=0.03371597545
+   - Iteracion: 123, t=0.984: Volumen=0.946544059291, Min u=0.698092374954, Max u=1.89500495895, Min sigma=0.770654502388, Max sigma=0.986236755274, Integral u^2=0.976520121542, Integral (sigma-sigmaQ)^2=0.0330108662957
+   - Iteracion: 124, t=0.992: Volumen=0.966626287319, Min u=0.712390608381, Max u=1.94018888744, Min sigma=0.772647868588, Max sigma=0.989448992521, Integral u^2=1.01916854067, Integral (sigma-sigmaQ)^2=0.0323030748884
+   - Iteracion: 125, t=1: Volumen=0.98697429213, Min u=0.726813182292, Max u=1.98646291471, Min sigma=0.774668509066, Max sigma=0.992751670943, Integral u^2=1.06338184427, Integral (sigma-sigmaQ)^2=0.0315930357891
+   - Iteracion: 126, t=1.008: Volumen=1.00758432234, Min u=0.741347657618, Max u=2.03385580861, Min sigma=0.776718525516, Max sigma=0.996147989414, Integral u^2=1.10919847233, Integral (sigma-sigmaQ)^2=0.0308812094385
+   - Iteracion: 127, t=1.016: Volumen=1.02845224221, Min u=0.755993723089, Max u=2.08239753428, Min sigma=0.778798159288, Max sigma=0.999640112965, Integral u^2=1.15665670137, Integral (sigma-sigmaQ)^2=0.0301680828273
+   - Iteracion: 128, t=1.024: Volumen=1.04957352202, Min u=0.770743356635, Max u=2.13211933717, Min sigma=0.780903565754, Max sigma=1.00322827493, Integral u^2=1.20579457783, Integral (sigma-sigmaQ)^2=0.0294541701543
+   - Iteracion: 129, t=1.032: Volumen=1.0709432286, Min u=0.785588069935, Max u=2.18306960583, Min sigma=0.78303872763, Max sigma=1.00691443559, Integral u^2=1.25664985069, Integral (sigma-sigmaQ)^2=0.0287400134704
+   - Iteracion: 130, t=1.04: Volumen=1.09255601611, Min u=0.800518900487, Max u=2.23528245052, Min sigma=0.785204159935, Max sigma=1.01070060876, Integral u^2=1.30925990377, Integral (sigma-sigmaQ)^2=0.0280261833056
+   - Iteracion: 131, t=1.048: Volumen=1.11440611699, Min u=0.815526404243, Max u=2.28877951962, Min sigma=0.787398037298, Max sigma=1.01458886394, Integral u^2=1.36366168813, Integral (sigma-sigmaQ)^2=0.0273132792789
+   - Iteracion: 132, t=1.056: Volumen=1.13648733321, Min u=0.830600648819, Max u=2.3435982706, Min sigma=0.789620950221, Max sigma=1.01858346927, Integral u^2=1.41989165505, Integral (sigma-sigmaQ)^2=0.0266019306879
+   - Iteracion: 133, t=1.064: Volumen=1.15879302769, Min u=0.845731207324, Max u=2.39977797562, Min sigma=0.791873872773, Max sigma=1.02268533659, Integral u^2=1.47798569022, Integral (sigma-sigmaQ)^2=0.0258927970755
+   - Iteracion: 134, t=1.072: Volumen=1.18131611597, Min u=0.860901244522, Max u=2.4573598534, Min sigma=0.794154553449, Max sigma=1.02689589219, Integral u^2=1.53797904961, Integral (sigma-sigmaQ)^2=0.0251865687735
+   - Iteracion: 135, t=1.08: Volumen=1.20404905806, Min u=0.876105076308, Max u=2.51641386643, Min sigma=0.796466189311, Max sigma=1.03121995332, Integral u^2=1.59990629783, Integral (sigma-sigmaQ)^2=0.0244839674195
+   - Iteracion: 136, t=1.088: Volumen=1.22698385054, Min u=0.891331144502, Max u=2.57696723247, Min sigma=0.798808836722, Max sigma=1.0356579198, Integral u^2=1.66380124949, Integral (sigma-sigmaQ)^2=0.0237857464459
+   - Iteracion: 137, t=1.096: Volumen=1.24978403682, Min u=0.906345324133, Max u=2.63827602429, Min sigma=0.801179705255, Max sigma=1.04021015843, Integral u^2=1.72876657466, Integral (sigma-sigmaQ)^2=0.0230928482588
+   - Iteracion: 138, t=1.104: Volumen=1.27219056788, Min u=0.920963473609, Max u=2.69979349968, Min sigma=0.803578806101, Max sigma=1.0448763423, Integral u^2=1.79405824567, Integral (sigma-sigmaQ)^2=0.0224063472497
+   - Iteracion: 139, t=1.112: Volumen=1.29418473296, Min u=0.93516327615, Max u=2.76154965702, Min sigma=0.806006800835, Max sigma=1.0498843232, Integral u^2=1.85958655928, Integral (sigma-sigmaQ)^2=0.0217273242703
+   - Iteracion: 140, t=1.12: Volumen=1.31574957876, Min u=0.948925909983, Max u=2.82356890991, Min sigma=0.808462773815, Max sigma=1.05522839477, Integral u^2=1.92526379992, Integral (sigma-sigmaQ)^2=0.0210568635839
+   - Iteracion: 141, t=1.128: Volumen=1.3368699213, Min u=0.962235218703, Max u=2.88587483579, Min sigma=0.810943077345, Max sigma=1.06069477283, Integral u^2=1.99100530793, Integral (sigma-sigmaQ)^2=0.0203960500557
+   - Iteracion: 142, t=1.136: Volumen=1.35753232213, Min u=0.975077210133, Max u=2.94852617506, Min sigma=0.813448206305, Max sigma=1.06628415717, Integral u^2=2.05673020669, Integral (sigma-sigmaQ)^2=0.0197459665449
+   - Iteracion: 143, t=1.144: Volumen=1.37772488937, Min u=0.987439654828, Max u=3.01152179186, Min sigma=0.815978419121, Max sigma=1.07199688327, Integral u^2=2.12236144588, Integral (sigma-sigmaQ)^2=0.0191076915414
+   - Iteracion: 144, t=1.152: Volumen=1.39743735634, Min u=0.999311988349, Max u=3.07488755443, Min sigma=0.818532691985, Max sigma=1.07783376448, Integral u^2=2.18782660974, Integral (sigma-sigmaQ)^2=0.0184822969179
+   - Iteracion: 145, t=1.16: Volumen=1.41666111306, Min u=1.01068524706, Max u=3.13867298908, Min sigma=0.82110776317, Max sigma=1.08379570667, Integral u^2=2.25305855218, Integral (sigma-sigmaQ)^2=0.0178708458219
+   - Iteracion: 146, t=1.168: Volumen=1.43538915851, Min u=1.02155198501, Max u=3.20292343918, Min sigma=0.823703940213, Max sigma=1.08988371794, Integral u^2=2.31799574966, Integral (sigma-sigmaQ)^2=0.0172743907404
+   - Iteracion: 147, t=1.176: Volumen=1.4536160443, Min u=1.03190620193, Max u=3.26927156742, Min sigma=0.82632104126, Max sigma=1.09609891883, Integral u^2=2.3825825897, Integral (sigma-sigmaQ)^2=0.016693971743
+   - Iteracion: 148, t=1.184: Volumen=1.471337811, Min u=1.04174327478, Max u=3.34155428572, Min sigma=0.828956226358, Max sigma=1.10244255309, Integral u^2=2.44676960092, Integral (sigma-sigmaQ)^2=0.016130614905
+   - Iteracion: 149, t=1.192: Volumen=1.48855183062, Min u=1.05105983218, Max u=3.41492563451, Min sigma=0.831608954517, Max sigma=1.10891599844, Integral u^2=2.51051332542, Integral (sigma-sigmaQ)^2=0.0155853309368
+   - Iteracion: 150, t=1.2: Volumen=1.50525659741, Min u=1.05985359727, Max u=3.48946569713, Min sigma=0.834279393306, Max sigma=1.11552077719, Integral u^2=2.57377595283, Integral (sigma-sigmaQ)^2=0.0150591140251
+   - Iteracion: 151, t=1.208: Volumen=1.52145177959, Min u=1.06812340123, Max u=3.56527077094, Min sigma=0.836966455106, Max sigma=1.12225856801, Integral u^2=2.63652582208, Integral (sigma-sigmaQ)^2=0.0145529407968
+   - Iteracion: 152, t=1.216: Volumen=1.53713819685, Min u=1.07586915017, Max u=3.64244489505, Min sigma=0.839668798522, Max sigma=1.12913121874, Integral u^2=2.69873766204, Integral (sigma-sigmaQ)^2=0.0140677694366
+   - Iteracion: 153, t=1.224: Volumen=1.55231773411, Min u=1.08309175129, Max u=3.72110031883, Min sigma=0.842383588372, Max sigma=1.13614075976, Integral u^2=2.76039258826, Integral (sigma-sigmaQ)^2=0.0136045389736
+   - Iteracion: 154, t=1.232: Volumen=1.56699325322, Min u=1.08979303739, Max u=3.80135802535, Min sigma=0.845111780819, Max sigma=1.1432894182, Integral u^2=2.8214780673, Integral (sigma-sigmaQ)^2=0.0131641687316
+   - Iteracion: 155, t=1.24: Volumen=1.58116844391, Min u=1.09597565303, Max u=3.8833481459, Min sigma=0.847852304326, Max sigma=1.15057963252, Integral u^2=2.88198762884, Integral (sigma-sigmaQ)^2=0.0127475579502
+   - Iteracion: 156, t=1.248: Volumen=1.59484750148, Min u=1.10164283126, Max u=3.96720993083, Min sigma=0.850604095413, Max sigma=1.15801406661, Integral u^2=2.94191987907, Integral (sigma-sigmaQ)^2=0.0123555855895
+   - Iteracion: 157, t=1.256: Volumen=1.60803521795, Min u=1.10679843345, Max u=4.05309299087, Min sigma=0.853364915475, Max sigma=1.16559562611, Integral u^2=3.00127903639, Integral (sigma-sigmaQ)^2=0.0119891102214
+   - Iteracion: 158, t=1.264: Volumen=1.62073697495, Min u=1.11144692913, Max u=4.14115834819, Min sigma=0.856133989216, Max sigma=1.17332747621, Integral u^2=3.06007511377, Integral (sigma-sigmaQ)^2=0.0116489700329
+   - Iteracion: 159, t=1.272: Volumen=1.632958656, Min u=1.11558679807, Max u=4.23157935568, Min sigma=0.8589112323, Max sigma=1.18121306089, Integral u^2=3.11832379172, Integral (sigma-sigmaQ)^2=0.0113359829518
+   - Iteracion: 160, t=1.28: Volumen=1.64470656036, Min u=1.11922732103, Max u=4.32454273876, Min sigma=0.861695626041, Max sigma=1.18925612357, Integral u^2=3.17604628971, Integral (sigma-sigmaQ)^2=0.0110509468869
+   - Iteracion: 161, t=1.288: Volumen=1.65598706955, Min u=1.12237616158, Max u=4.42024898394, Min sigma=0.864486165055, Max sigma=1.19746072791, Integral u^2=3.23326822727, Integral (sigma-sigmaQ)^2=0.0107946400911
+   - Iteracion: 162, t=1.296: Volumen=1.66680658602, Min u=1.12503923191, Max u=4.51891370033, Min sigma=0.867281857671, Max sigma=1.20583128314, Integral u^2=3.29001953998, Integral (sigma-sigmaQ)^2=0.0105678215938
+   - Iteracion: 163, t=1.304: Volumen=1.67717161524, Min u=1.12722268558, Max u=4.62076960878, Min sigma=0.870080503822, Max sigma=1.21437343954, Integral u^2=3.34633499952, Integral (sigma-sigmaQ)^2=0.0103712316875
+   - Iteracion: 164, t=1.312: Volumen=1.68708872631, Min u=1.12893288688, Max u=4.7260683443, Min sigma=0.872812959256, Max sigma=1.22309153538, Integral u^2=3.40225427044, Integral (sigma-sigmaQ)^2=0.0102055924847
+   - Iteracion: 165, t=1.32: Volumen=1.69656447843, Min u=1.13017636071, Max u=4.83508237454, Min sigma=0.875528497749, Max sigma=1.2319911762, Integral u^2=3.45782184417, Integral (sigma-sigmaQ)^2=0.010071608539
+   - Iteracion: 166, t=1.328: Volumen=1.70560503655, Min u=1.13095955737, Max u=4.94810609328, Min sigma=0.878242717525, Max sigma=1.24107842903, Integral u^2=3.5130856505, Integral (sigma-sigmaQ)^2=0.00996996751603
+   - Iteracion: 167, t=1.336: Volumen=1.71421617837, Min u=1.13128885558, Max u=5.06545850691, Min sigma=0.88095033309, Max sigma=1.25035985869, Integral u^2=3.5680973176, Integral (sigma-sigmaQ)^2=0.00990134087993
+   - Iteracion: 168, t=1.344: Volumen=1.72240340526, Min u=1.1311547796, Max u=5.18748663338, Min sigma=0.883656690303, Max sigma=1.25984256941, Integral u^2=3.62291293696, Integral (sigma-sigmaQ)^2=0.00986638460689
+   - Iteracion: 169, t=1.352: Volumen=1.73017191224, Min u=1.13057675898, Max u=5.31456881507, Min sigma=0.886360513731, Max sigma=1.2695342513, Integral u^2=3.67759328095, Integral (sigma-sigmaQ)^2=0.00986573992722
+   - Iteracion: 170, t=1.36: Volumen=1.73752637422, Min u=1.1295626622, Max u=5.44711780708, Min sigma=0.889055410325, Max sigma=1.27944323083, Integral u^2=3.73220324453, Integral (sigma-sigmaQ)^2=0.00990003407373
+   - Iteracion: 171, t=1.368: Volumen=1.74447062779, Min u=1.1281183795, Max u=5.58558393925, Min sigma=0.891740733994, Max sigma=1.28957852525, Integral u^2=3.78681082187, Integral (sigma-sigmaQ)^2=0.00996988099367
+   - Iteracion: 172, t=1.376: Volumen=1.75100793427, Min u=1.12624965787, Max u=5.73049229316, Min sigma=0.89440219991, Max sigma=1.29994990631, Integral u^2=3.84148876579, Integral (sigma-sigmaQ)^2=0.0100758820739
+   - Iteracion: 173, t=1.384: Volumen=1.75714099476, Min u=1.12345057695, Max u=5.88235897868, Min sigma=0.897039135468, Max sigma=1.31056797232, Integral u^2=3.89631524821, Integral (sigma-sigmaQ)^2=0.0102186268738
+   - Iteracion: 174, t=1.392: Volumen=1.76287164135, Min u=1.1202119607, Max u=6.04178222938, Min sigma=0.899668041877, Max sigma=1.32144422717, Integral u^2=3.95137309981, Integral (sigma-sigmaQ)^2=0.0103986938034
+   - Iteracion: 175, t=1.4: Volumen=1.76820064455, Min u=1.11652312716, Max u=6.20942197679, Min sigma=0.902289148581, Max sigma=1.33259116842, Integral u^2=4.00674964707, Integral (sigma-sigmaQ)^2=0.0106166507341
+   - Iteracion: 176, t=1.408: Volumen=1.7731279906, Min u=1.11241575683, Max u=6.38600957242, Min sigma=0.904901267964, Max sigma=1.34402239016, Integral u^2=4.06253892752, Integral (sigma-sigmaQ)^2=0.0108730556347
+   - Iteracion: 177, t=1.416: Volumen=1.77765284678, Min u=1.10790851808, Max u=6.57235786684, Min sigma=0.907503255008, Max sigma=1.35575270008, Integral u^2=4.11884262799, Integral (sigma-sigmaQ)^2=0.0111684571946
+   - Iteracion: 178, t=1.424: Volumen=1.78177288465, Min u=1.10300611421, Max u=6.76937001199, Min sigma=0.910094345897, Max sigma=1.36779824675, Integral u^2=4.17576801934, Integral (sigma-sigmaQ)^2=0.0115033952377
+   - Iteracion: 179, t=1.432: Volumen=1.78548480281, Min u=1.09768795001, Max u=6.97805571732, Min sigma=0.912673208529, Max sigma=1.38017667119, Integral u^2=4.23343200989, Integral (sigma-sigmaQ)^2=0.0118784012282
+   - Iteracion: 180, t=1.44: Volumen=1.78878425937, Min u=1.09194698505, Max u=7.19954732171, Min sigma=0.915240247081, Max sigma=1.39290728038, Integral u^2=4.29196264251, Integral (sigma-sigmaQ)^2=0.0122939987487
+   - Iteracion: 181, t=1.448: Volumen=1.79166519765, Min u=1.0857915526, Max u=7.4351157288, Min sigma=0.917794699554, Max sigma=1.40601124046, Integral u^2=4.35149779066, Integral (sigma-sigmaQ)^2=0.0127507037163
+   - Iteracion: 182, t=1.456: Volumen=1.79412042682, Min u=1.07921332648, Max u=7.68619617542, Min sigma=0.920335813101, Max sigma=1.41951233485, Integral u^2=4.41219071966, Integral (sigma-sigmaQ)^2=0.0132490247614
+   - Iteracion: 183, t=1.464: Volumen=1.79614113461, Min u=1.07217997479, Max u=7.95441292991, Min sigma=0.922862621483, Max sigma=1.43343658283, Integral u^2=4.47421068838, Integral (sigma-sigmaQ)^2=0.0137894634087
+   - Iteracion: 184, t=1.472: Volumen=1.79771686349, Min u=1.06419388347, Max u=8.24161170905, Min sigma=0.925374030755, Max sigma=1.44781145026, Integral u^2=4.53774660905, Integral (sigma-sigmaQ)^2=0.0143725142183
+   - Iteracion: 185, t=1.48: Volumen=1.79883552526, Min u=1.05581445057, Max u=8.54989895864, Min sigma=0.927869875275, Max sigma=1.4626682339, Integral u^2=4.60301178911, Integral (sigma-sigmaQ)^2=0.0149986649254
+   - Iteracion: 186, t=1.488: Volumen=1.7994829723, Min u=1.04704449671, Max u=8.88168667673, Min sigma=0.930349433501, Max sigma=1.47804166248, Integral u^2=4.67024728265, Integral (sigma-sigmaQ)^2=0.0156683963788
+   - Iteracion: 187, t=1.496: Volumen=1.79964313419, Min u=1.03788682198, Max u=9.23975074974, Min sigma=0.932811841189, Max sigma=1.49397038857, Integral u^2=4.7397296907, Integral (sigma-sigmaQ)^2=0.016382182552
+   - Iteracion: 188, t=1.504: Volumen=1.79929765494, Min u=1.02834416368, Max u=9.62729895471, Min sigma=0.935255644871, Max sigma=1.51049756651, Integral u^2=4.81177786062, Integral (sigma-sigmaQ)^2=0.0171404904009
+   - Iteracion: 189, t=1.512: Volumen=1.79842562674, Min u=1.01841922645, Max u=10.0480554726, Min sigma=0.937680984461, Max sigma=1.52767153652, Integral u^2=4.88676222362, Integral (sigma-sigmaQ)^2=0.0179437796137
+   - Iteracion: 190, t=1.52: Volumen=1.79700359261, Min u=1.00811487096, Max u=10.5064300335, Min sigma=0.940086676457, Max sigma=1.54554664298, Integral u^2=4.96511848832, Integral (sigma-sigmaQ)^2=0.018792502437
+   - Iteracion: 191, t=1.528: Volumen=1.79500495735, Min u=0.997434050809, Max u=11.0075346638, Min sigma=0.94247254625, Max sigma=1.56418420816, Integral u^2=5.04736134089, Integral (sigma-sigmaQ)^2=0.0196871032449
+   - Iteracion: 192, t=1.536: Volumen=1.79239962419, Min u=0.986379902153, Max u=11.5573408141, Min sigma=0.944837915174, Max sigma=1.58365370215, Integral u^2=5.13410398165, Integral (sigma-sigmaQ)^2=0.020628017979
+   - Iteracion: 193, t=1.544: Volumen=1.78915369132, Min u=0.974955915208, Max u=12.1629925857, Min sigma=0.947182113211, Max sigma=1.60403415704, Integral u^2=5.22608397009, Integral (sigma-sigmaQ)^2=0.0216156735225
+   - Iteracion: 194, t=1.552: Volumen=1.78522887861, Min u=0.963166047571, Max u=12.8330189973, Min sigma=0.949504346184, Max sigma=1.62541588117, Integral u^2=5.32419508976, Integral (sigma-sigmaQ)^2=0.0226504868266
+   - Iteracion: 195, t=1.56: Volumen=1.78058187136, Min u=0.951014886413, Max u=13.5776683869, Min sigma=0.951803766863, Max sigma=1.64790254726, Integral u^2=5.42952872765, Integral (sigma-sigmaQ)^2=0.0237328636991
+   - Iteracion: 196, t=1.568: Volumen=1.77516355962, Min u=0.938507874255, Max u=14.4093394683, Min sigma=0.954080062402, Max sigma=1.67161374894, Integral u^2=5.54342776433, Integral (sigma-sigmaQ)^2=0.0248631971033
+   - Iteracion: 197, t=1.576: Volumen=1.76891815453, Min u=0.925651622115, Max u=15.3431414, Min sigma=0.956332613769, Max sigma=1.69668814509, Integral u^2=5.66755701062, Integral (sigma-sigmaQ)^2=0.0260418647273
+   - Iteracion: 198, t=1.584: Volumen=1.76178188446, Min u=0.912454223261, Max u=16.3976239831, Min sigma=0.958560621467, Max sigma=1.72328733736, Integral u^2=5.80399342962, Integral (sigma-sigmaQ)^2=0.0272692251724
+   - Iteracion: 199, t=1.592: Volumen=1.75368183207, Min u=0.898925867371, Max u=17.5957458055, Min sigma=0.960763523481, Max sigma=1.75160067811, Integral u^2=5.95534725437, Integral (sigma-sigmaQ)^2=0.0285456123732
+   - Iteracion: 200, t=1.6: Volumen=1.74453444106, Min u=0.885079622399, Max u=18.9661612371, Min sigma=0.962940959987, Max sigma=1.78185124326, Integral u^2=6.12491974487, Integral (sigma-sigmaQ)^2=0.029871327082
+   - Iteracion: 201, t=1.608: Volumen=1.73424372308, Min u=0.870932492218, Max u=20.5449462581, Min sigma=0.965092432446, Max sigma=1.81430325755, Integral u^2=6.31690894825, Integral (sigma-sigmaQ)^2=0.0312466236115
+   - Iteracion: 202, t=1.616: Volumen=1.72269923853, Min u=0.856506901361, Max u=22.3779316481, Min sigma=0.967217497962, Max sigma=1.84927131083, Integral u^2=6.53667718397, Integral (sigma-sigmaQ)^2=0.0326716890215
+   - Iteracion: 203, t=1.624: Volumen=1.70977430844, Min u=0.841832940332, Max u=24.5238862594, Min sigma=0.969315787855, Max sigma=1.88713174943, Integral u^2=6.79109846599, Integral (sigma-sigmaQ)^2=0.0341466106942
+   - Iteracion: 204, t=1.632: Volumen=1.69532428278, Min u=0.826951477469, Max u=27.058874904, Min sigma=0.971387033509, Max sigma=1.9283365906, Integral u^2=7.08899650874, Integral (sigma-sigmaQ)^2=0.0356713252034
+   - Iteracion: 205, t=1.64: Volumen=1.67918644427, Min u=0.811918956801, Max u=30.0822694621, Min sigma=0.973431103304, Max sigma=1.97343019103, Integral u^2=7.44169140256, Integral (sigma-sigmaQ)^2=0.0372455386563
+   - Iteracion: 206, t=1.648: Volumen=1.66118281786, Min u=0.79681455844, Max u=33.7250414982, Min sigma=0.97544805595, Max sigma=2.02306846884, Integral u^2=7.86364921177, Integral (sigma-sigmaQ)^2=0.0388686031346
+   - Iteracion: 207, t=1.656: Volumen=1.64113072888, Min u=0.766778059842, Max u=38.1612164897, Min sigma=0.977438220029, Max sigma=2.07803959067, Integral u^2=8.37322175461, Integral (sigma-sigmaQ)^2=0.0405393294305
+   - Iteracion: 208, t=1.664: Volumen=1.61887294736, Min u=0.719787600073, Max u=43.6237591729, Min sigma=0.979402106017, Max sigma=2.13928344936, Integral u^2=8.99347905863, Integral (sigma-sigmaQ)^2=0.0422557184324
+   - Iteracion: 209, t=1.672: Volumen=1.59437296263, Min u=0.67152466652, Max u=50.427860757, Min sigma=0.981341215707, Max sigma=2.20790663869, Integral u^2=9.75358822535, Integral (sigma-sigmaQ)^2=0.0440146495292
+   - Iteracion: 210, t=1.68: Volumen=1.56703236239, Min u=0.622112612936, Max u=58.9565554408, Min sigma=0.983257265928, Max sigma=2.28510509303, Integral u^2=10.6749364103, Integral (sigma-sigmaQ)^2=0.0458100903736
+   - Iteracion: 211, t=1.688: Volumen=1.53204212546, Min u=0.570414091371, Max u=69.3840958442, Min sigma=0.984182637406, Max sigma=2.29980502072, Integral u^2=11.6792526423, Integral (sigma-sigmaQ)^2=0.0463406696085
+   - Iteracion: 212, t=1.696: Volumen=1.4930653669, Min u=0.52284679618, Max u=69.8570890649, Min sigma=0.983559722295, Max sigma=2.19771227598, Integral u^2=11.4084603667, Integral (sigma-sigmaQ)^2=0.0448853573031
+   - Iteracion: 213, t=1.704: Volumen=1.46225753318, Min u=0.491208855679, Max u=52.497892665, Min sigma=0.98294913222, Max sigma=2.12155627398, Integral u^2=9.32907114948, Integral (sigma-sigmaQ)^2=0.043535913088
+   - Iteracion: 214, t=1.712: Volumen=1.442448064, Min u=0.478692164765, Max u=42.2646194938, Min sigma=0.982349884729, Max sigma=2.06056994442, Integral u^2=7.99161231556, Integral (sigma-sigmaQ)^2=0.0422664492351
+   - Iteracion: 215, t=1.72: Volumen=1.42992763708, Min u=0.4829250894, Max u=35.6438003565, Min sigma=0.981760745227, Max sigma=2.00941276398, Integral u^2=7.09156325135, Integral (sigma-sigmaQ)^2=0.0410599946601
+   - Iteracion: 216, t=1.728: Volumen=1.42251051603, Min u=0.499830964317, Max u=30.9772842184, Min sigma=0.9811803187, Max sigma=1.96518190914, Integral u^2=6.44844873172, Integral (sigma-sigmaQ)^2=0.0399050862258
+   - Iteracion: 217, t=1.736: Volumen=1.41886875632, Min u=0.525691937314, Max u=27.4927840462, Min sigma=0.98060713404, Max sigma=1.92611680221, Integral u^2=5.97007215885, Integral (sigma-sigmaQ)^2=0.0387935436448
+   - Iteracion: 218, t=1.744: Volumen=1.4181317361, Min u=0.55771877099, Max u=24.7836490047, Min sigma=0.980039708328, Max sigma=1.89106189392, Integral u^2=5.60460336917, Integral (sigma-sigmaQ)^2=0.0377192992795
+   - Iteracion: 219, t=1.752: Volumen=1.41969542291, Min u=0.593990628732, Max u=22.6133251338, Min sigma=0.979476588992, Max sigma=1.85921464068, Integral u^2=5.3201804207, Integral (sigma-sigmaQ)^2=0.0366777333215
+   - Iteracion: 220, t=1.76: Volumen=1.42312387429, Min u=0.63323674019, Max u=20.8336667171, Min sigma=0.978916377739, Max sigma=1.82999381783, Integral u^2=5.09588060837, Integral (sigma-sigmaQ)^2=0.0356652619639
+   - Iteracion: 221, t=1.768: Volumen=1.42809338206, Min u=0.66040478235, Max u=19.3466557396, Min sigma=0.978357741714, Max sigma=1.80296465398, Integral u^2=4.91730896683, Integral (sigma-sigmaQ)^2=0.0346790646908
+   - Iteracion: 222, t=1.776: Volumen=1.43435828099, Min u=0.663040730816, Max u=18.0846649493, Min sigma=0.977799416653, Max sigma=1.77779338814, Integral u^2=4.77422614959, Integral (sigma-sigmaQ)^2=0.0337168951187
+   - Iteracion: 223, t=1.784: Volumen=1.44172878816, Min u=0.6668827285, Max u=16.9994708865, Min sigma=0.977240205482, Max sigma=1.75421823902, Integral u^2=4.65916574785, Integral (sigma-sigmaQ)^2=0.03277694562
+   - Iteracion: 224, t=1.792: Volumen=1.45005603291, Min u=0.67186819718, Max u=16.0557523919, Min sigma=0.976678974594, Max sigma=1.73203009498, Integral u^2=4.56657586229, Integral (sigma-sigmaQ)^2=0.0318577483258
+   - Iteracion: 225, t=1.8: Volumen=1.45922163431, Min u=0.677908490331, Max u=15.2270512796, Min sigma=0.976114649124, Max sigma=1.7110592469, Integral u^2=4.49226039182, Integral (sigma-sigmaQ)^2=0.0309581015839
+   - Iteracion: 226, t=1.808: Volumen=1.46913027823, Min u=0.684956389032, Max u=14.4931626175, Min sigma=0.975546207997, Max sigma=1.69116602813, Integral u^2=4.43300252613, Integral (sigma-sigmaQ)^2=0.0300770146417
+   - Iteracion: 227, t=1.816: Volumen=1.47970433473, Min u=0.692940724915, Max u=13.8383941088, Min sigma=0.974972678311, Max sigma=1.67223406243, Integral u^2=4.38630436819, Integral (sigma-sigmaQ)^2=0.0292136655909
+   - Iteracion: 228, t=1.824: Volumen=1.49087989593, Min u=0.701819905708, Max u=13.2503740954, Min sigma=0.974393063594, Max sigma=1.65416529961, Integral u^2=4.3502032487, Integral (sigma-sigmaQ)^2=0.0283673690796
+   - Iteracion: 229, t=1.832: Volumen=1.50260382054, Min u=0.711547712131, Max u=12.7192167997, Min sigma=0.973806547388, Max sigma=1.63687630388, Integral u^2=4.3231400534, Integral (sigma-sigmaQ)^2=0.0275375512951
+   - Iteracion: 230, t=1.84: Volumen=1.51483150261, Min u=0.722078262968, Max u=12.2369263009, Min sigma=0.973212279609, Max sigma=1.62029543706, Integral u^2=4.30386354906, Integral (sigma-sigmaQ)^2=0.0267237304026
+   - Iteracion: 231, t=1.848: Volumen=1.52752516761, Min u=0.733374683414, Max u=11.7969636119, Min sigma=0.972609443708, Max sigma=1.60436069145, Integral u^2=4.2913600275, Integral (sigma-sigmaQ)^2=0.0259255011171
+   - Iteracion: 232, t=1.856: Volumen=1.54065255702, Min u=0.745404304711, Max u=11.3939273394, Min sigma=0.971997253789, Max sigma=1.58901800177, Integral u^2=4.2848009931, Integral (sigma-sigmaQ)^2=0.0251425224309
+   - Iteracion: 233, t=1.864: Volumen=1.55418590208, Min u=0.758133561162, Max u=11.023314792, Min sigma=0.97137495206, Max sigma=1.5742199148, Integral u^2=4.28350385701, Integral (sigma-sigmaQ)^2=0.0243745077702
+   - Iteracion: 234, t=1.872: Volumen=1.56810111499, Min u=0.769981731801, Max u=10.6813409445, Min sigma=0.970741806575, Max sigma=1.55992452961, Integral u^2=4.28690210447, Integral (sigma-sigmaQ)^2=0.0236212170374
+   - Iteracion: 235, t=1.88: Volumen=1.58237714522, Min u=0.781515763822, Max u=10.3647995927, Min sigma=0.970097109234, Max sigma=1.54609464485, Integral u^2=4.29452242769, Integral (sigma-sigmaQ)^2=0.0228824501296
+   - Iteracion: 236, t=1.888: Volumen=1.5969954623, Min u=0.793880204812, Max u=10.0709556734, Min sigma=0.969440174026, Max sigma=1.53269706608, Integral u^2=4.30596702797, Integral (sigma-sigmaQ)^2=0.0221580416226
+   - Iteracion: 237, t=1.896: Volumen=1.61193963656, Min u=0.807031808044, Max u=9.79746088308, Min sigma=0.96877033547, Max sigma=1.51970203822, Integral u^2=4.32089978781, Integral (sigma-sigmaQ)^2=0.0214478563802
+   - Iteracion: 238, t=1.904: Volumen=1.62719499638, Min u=0.820930316997, Max u=9.54228691109, Min sigma=0.970039832111, Max sigma=1.52909721116, Integral u^2=4.33903536601, Integral (sigma-sigmaQ)^2=0.0220097850497
+   - Iteracion: 239, t=1.912: Volumen=1.64259595077, Min u=0.835048109001, Max u=9.59280215894, Min sigma=0.972047374534, Max sigma=1.54653126563, Integral u^2=4.40179159365, Integral (sigma-sigmaQ)^2=0.0230690096117
+   - Iteracion: 240, t=1.92: Volumen=1.65785243352, Min u=0.848701650179, Max u=9.87803717428, Min sigma=0.974076205114, Max sigma=1.56435528021, Integral u^2=4.50284011463, Integral (sigma-sigmaQ)^2=0.0241718055162
+   - Iteracion: 241, t=1.928: Volumen=1.67273957399, Min u=0.861338910048, Max u=10.2883609826, Min sigma=0.976122683208, Max sigma=1.58280742611, Integral u^2=4.62705325686, Integral (sigma-sigmaQ)^2=0.0253215861481
+   - Iteracion: 242, t=1.936: Volumen=1.68710235187, Min u=0.868594713334, Max u=10.7885235105, Min sigma=0.978183686812, Max sigma=1.60204880326, Integral u^2=4.76813058227, Integral (sigma-sigmaQ)^2=0.0265210738644
+   - Iteracion: 243, t=1.944: Volumen=1.70081363542, Min u=0.874092831337, Max u=11.368216081, Min sigma=0.980256128449, Max sigma=1.62221460538, Integral u^2=4.92341942809, Integral (sigma-sigmaQ)^2=0.0277726108268
+   - Iteracion: 244, t=1.952: Volumen=1.71375543535, Min u=0.878104384531, Max u=12.0279272898, Min sigma=0.98233719519, Max sigma=1.64343533505, Integral u^2=5.09206612036, Integral (sigma-sigmaQ)^2=0.0290783136907
+   - Iteracion: 245, t=1.96: Volumen=1.72580890035, Min u=0.880721741128, Max u=12.7741588568, Min sigma=0.984424310253, Max sigma=1.66584790889, Integral u^2=5.27426319133, Integral (sigma-sigmaQ)^2=0.0304401513592
+   - Iteracion: 246, t=1.968: Volumen=1.73684787497, Min u=0.881999923364, Max u=13.6177866176, Min sigma=0.986515082702, Max sigma=1.68960292885, Integral u^2=5.47093609577, Integral (sigma-sigmaQ)^2=0.0318599820097
+   - Iteracion: 247, t=1.976: Volumen=1.74673380737, Min u=0.881262428973, Max u=14.5737333465, Min sigma=0.98860703146, Max sigma=1.71487069003, Integral u^2=5.68363588907, Integral (sigma-sigmaQ)^2=0.0333395663815
+   - Iteracion: 248, t=1.984: Volumen=1.75531089612, Min u=0.87913585846, Max u=15.6613405739, Min sigma=0.990698227671, Max sigma=1.7418471541, Integral u^2=5.91454504533, Integral (sigma-sigmaQ)^2=0.0348805648802
+   - Iteracion: 249, t=1.992: Volumen=1.76240080638, Min u=0.875860273137, Max u=16.9052433997, Min sigma=0.992786602018, Max sigma=1.77076060868, Integral u^2=6.16655820662, Integral (sigma-sigmaQ)^2=0.0364845208418
+   - Iteracion: 250, t=2: Volumen=1.76779645956, Min u=0.871460516999, Max u=18.3367295228, Min sigma=0.994870127216, Max sigma=1.8018795413, Integral u^2=6.44342334503, Integral (sigma-sigmaQ)^2=0.0381528288189
+------------------------------------------------------------
+ Funcional de costo
+   - J1: 2.28028143634
+   - J2: 0.0428843606218
+   - J3: 0
+   - J4: 0
+   - J5: 0.25
+   - J6: 0.213199719125
+   - J total: 2.78636551609
+------------------------------------------------------------
+ Datos adicionales
+   - Integral temporal de C: 0.25
+   - Residuo proyectado (KKT): 0.00315131495088 (C: 0.00315131495088, S: 0.000458643379094, mu: 1.77193783105)
+   - Tiempo de ejecucion total (s): 39678
+   - Fecha/Hora final: 2026-08-29 09:13:22
+------------------------------------------------------------
+ Informacion del equipo
+   - Nota: algunos campos pueden aparecer como no disponibles segun el sistema operativo.
+   - Sistema operativo:
+       macOS 26.5
+   - Hardware:
+             Model Name: MacBook Air
+             Model Identifier: Mac16,13
+             Chip: Apple M4
+             Memory: 16 GB
+   - Procesador:
+             Chip: Apple M4
+             Total Number of Cores: 10 (4 Performance and 6 Efficiency)
+   - Memoria RAM:
+             Memory: 16 GB
+   - GPU:
+             Chipset Model: Apple M4
+             Metal Support: Metal 4
+============================================================
+

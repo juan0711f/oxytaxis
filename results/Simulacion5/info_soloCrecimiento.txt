@@ -1,0 +1,42 @@
+============================================================
+ Resumen de ejecucion
+============================================================
+ Simulacion : Simulacion5
+ Modo       : solo crecimiento
+ Comando    : FreeFem++ -nw code.edp -nSimulacion 5 -soloCrecimiento -c "Experimento 1 (evolucion sin control)"
+ Fecha/Hora : 2026-11-01 13:27:12
+ Comentario : Experimento 1 (evolucion sin control)
+------------------------------------------------------------
+ Rutas
+   - Base       : results/Simulacion5/
+   - Ejecucion  : results/Simulacion5/soloCrecimiento/
+   - Imagenes   : results/Simulacion5/soloCrecimiento/images/
+   - Soluciones : results/Simulacion5/soloCrecimiento/solutions/
+   - Malla      : src/sources/axial.mesh
+------------------------------------------------------------
+ Discretizacion
+   - nIter: 250
+   - dt: 0.008
+   - T: 2
+------------------------------------------------------------
+ Parametros del modelo
+   - Du: 2, alpha: 4, beta: 1, xhi: 10, psi: 2
+   - DSigma: 0.02, Aox: 0.6, kox: 0.1, Per: 0.1, Sv: 1, Sc: 0.4
+   - pmax: 3.5, b: 1, CT: 0.25, cmax: 1
+ Controles
+   - C=0 y S=0 en todos los pasos temporales
+ Pesos funcional
+   - k1: 1, k2: 1, k3: 1, k4: 1
+   - l1: 1, l2: 1
+------------------------------------------------------------
+ Cambios CLI
+ - nSimulacion: 5
+ - modo: solo crecimiento
+ - comentario: Experimento 1 (evolucion sin control)
+ Cambios de parametros
+   - (sin cambios)
+============================================================
+
+Resumen final:
+ - Funcional J: 5.30597126064
+ - Integral temporal de C: 0
